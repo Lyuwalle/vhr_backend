@@ -14,8 +14,8 @@ public class HrRepo {
     private HrDBMapper hrDBMapper;
 
     public Hr loadUserByUsername(Hr hrInfo) {
-        HrDB hrDB = BeanCopyUtil.copy(hrInfo, HrDB.class);
-        HrDB hrDB1 = hrDBMapper.selectOne(hrDB);
-        return BeanCopyUtil.copy(hrDB1, Hr.class);
+        HrDB hrDB = new HrDB();
+        hrDB.setUsername(hrInfo.getUsername());
+        return BeanCopyUtil.copy(hrDBMapper.selectOne(hrDB), Hr.class);
     }
 }

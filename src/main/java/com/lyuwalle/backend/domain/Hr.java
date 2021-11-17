@@ -57,11 +57,12 @@ public class Hr implements UserDetails {
     @Override
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>(roles.size());
+        /*List<SimpleGrantedAuthority> authorities = new ArrayList<>(roles.size());
         for(Role role : roles) {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
         }
-        return authorities;
+        return authorities;*/
+        return null;
     }
 
     @Override
@@ -81,7 +82,7 @@ public class Hr implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
@@ -95,6 +96,6 @@ public class Hr implements UserDetails {
     }
 
     public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+        this.username = username;
     }
 }

@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
-@MapperScan(basePackages = "com.lyuwalle.vhr_backEnd.mapper")
+@MapperScan(basePackages = "com.lyuwalle.backend.mapper")
 public class VhrBackEndApplication {
 
     public static void main(String[] args) {

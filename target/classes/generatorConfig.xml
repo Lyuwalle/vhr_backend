@@ -45,7 +45,7 @@
         </javaClientGenerator>
 
         <!-- 表映射为实体 -->
-        <table tableName="hr" domainObjectName="HrDB">
+        <table tableName="role" domainObjectName="RoleDB">
             <!-- 使用经典驼峰命名法 -->
             <property name="useActualColumnNames" value="true"/>
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
