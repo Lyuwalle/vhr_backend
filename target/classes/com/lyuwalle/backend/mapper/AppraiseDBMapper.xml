@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyuwalle.backend.mapper.AppraiseDBMapper">
+  <resultMap id="BaseResultMap" type="com.lyuwalle.backend.model.AppraiseDB">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="eid" jdbcType="INTEGER" property="eid" />
+    <result column="appDate" jdbcType="DATE" property="appDate" />
+    <result column="appResult" jdbcType="VARCHAR" property="appResult" />
+    <result column="appContent" jdbcType="VARCHAR" property="appContent" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+</mapper>

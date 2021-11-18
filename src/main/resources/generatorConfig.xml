@@ -45,11 +45,107 @@
         </javaClientGenerator>
 
         <!-- 表映射为实体 -->
-        <table tableName="role" domainObjectName="RoleDB">
+        <table tableName="adjust_salary" domainObjectName="AdjustSalaryDB">
             <!-- 使用经典驼峰命名法 -->
             <property name="useActualColumnNames" value="true"/>
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
+        <table tableName="appraise" domainObjectName="AppraiseDB">
+            <!-- 使用经典驼峰命名法 -->
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="department" domainObjectName="DepartmentDB">
+            <!-- 使用经典驼峰命名法 -->
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="emp_salary" domainObjectName="EmpSalaryDB">
+            <!-- 使用经典驼峰命名法 -->
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="employee" domainObjectName="EmployeeDB">
+            <!-- 使用经典驼峰命名法 -->
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="employee_ec" domainObjectName="EmployeeEcDB">
+            <!-- 使用经典驼峰命名法 -->
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="employee_remove" domainObjectName="EmployeeRemoveDB">
+            <!-- 使用经典驼峰命名法 -->
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="employee_train" domainObjectName="EmployeeTrainDB">
+            <!-- 使用经典驼峰命名法 -->
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="hr_role" domainObjectName="HrRoleDB">
+            <!-- 使用经典驼峰命名法 -->
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="job_level" domainObjectName="JobLevelDB">
+            <!-- 使用经典驼峰命名法 -->
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="mail_send_log" domainObjectName="MailSendLogDB">
+            <!-- 使用经典驼峰命名法 -->
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="menu" domainObjectName="MenuDB">
+            <!-- 使用经典驼峰命名法 -->
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="menu_role" domainObjectName="MenuRoleDB">
+            <!-- 使用经典驼峰命名法 -->
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="msg_content" domainObjectName="MsgContentDB">
+            <!-- 使用经典驼峰命名法 -->
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="nation" domainObjectName="NationDB">
+            <!-- 使用经典驼峰命名法 -->
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="oplog" domainObjectName="OplogDB">
+            <!-- 使用经典驼峰命名法 -->
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="politics_status" domainObjectName="PoliticsStatusDB">
+            <!-- 使用经典驼峰命名法 -->
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="position" domainObjectName="PositionDB">
+            <!-- 使用经典驼峰命名法 -->
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="salary" domainObjectName="SalaryDB">
+            <!-- 使用经典驼峰命名法 -->
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="sys_msg" domainObjectName="SysMsgDB">
+            <!-- 使用经典驼峰命名法 -->
+            <property name="useActualColumnNames" value="true"/>
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+
 
     </context>
 </generatorConfiguration>

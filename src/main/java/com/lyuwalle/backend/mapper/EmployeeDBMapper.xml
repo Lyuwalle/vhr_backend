@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lyuwalle.backend.mapper.EmployeeDBMapper">
+  <resultMap id="BaseResultMap" type="com.lyuwalle.backend.model.EmployeeDB">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="gender" jdbcType="CHAR" property="gender" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="idCard" jdbcType="CHAR" property="idCard" />
+    <result column="wedlock" jdbcType="CHAR" property="wedlock" />
+    <result column="nationId" jdbcType="INTEGER" property="nationId" />
+    <result column="nativePlace" jdbcType="VARCHAR" property="nativePlace" />
+    <result column="politicId" jdbcType="INTEGER" property="politicId" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="departmentId" jdbcType="INTEGER" property="departmentId" />
+    <result column="jobLevelId" jdbcType="INTEGER" property="jobLevelId" />
+    <result column="posId" jdbcType="INTEGER" property="posId" />
+    <result column="engageForm" jdbcType="VARCHAR" property="engageForm" />
+    <result column="tiptopDegree" jdbcType="CHAR" property="tiptopDegree" />
+    <result column="specialty" jdbcType="VARCHAR" property="specialty" />
+    <result column="school" jdbcType="VARCHAR" property="school" />
+    <result column="beginDate" jdbcType="DATE" property="beginDate" />
+    <result column="workState" jdbcType="CHAR" property="workState" />
+    <result column="workID" jdbcType="CHAR" property="workID" />
+    <result column="contractTerm" jdbcType="DOUBLE" property="contractTerm" />
+    <result column="conversionTime" jdbcType="DATE" property="conversionTime" />
+    <result column="notWorkDate" jdbcType="DATE" property="notWorkDate" />
+    <result column="beginContract" jdbcType="DATE" property="beginContract" />
+    <result column="endContract" jdbcType="DATE" property="endContract" />
+    <result column="workAge" jdbcType="INTEGER" property="workAge" />
+  </resultMap>
+</mapper>
