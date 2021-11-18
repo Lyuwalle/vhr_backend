@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * 类的属性复制工具
+ * 要求类型和名称一模一样
+ */
 @Slf4j
 public class BeanCopyUtil {
 
