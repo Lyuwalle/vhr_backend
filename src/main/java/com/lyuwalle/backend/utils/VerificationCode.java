@@ -12,17 +12,22 @@ import java.util.Random;
  * @author lyuxiyang
  *
  * 生成验证码的工具类
+ * width: 验证码图片的宽度
+ * height: 验证码图片的高度
+ * disturbLines: 验证码图片的干扰线
+ * verificationCodes: 验证码的长度
+ * text: 正确的验证码
  */
 public class VerificationCode {
 
-    private int width = 100;
-    private int height = 30;
-    private int disturbLines = 5;
-    private int verificationCodes = 4;
-    private String[] fontNames = {"宋体", "楷体", "隶书", "微软雅黑"};
-    private Color background = new Color(255, 255, 255);
-    private Random random = new Random();
-    private String codes = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private final int width = 100;
+    private final int height = 30;
+    private final int disturbLines = 5;
+    private final int verificationCodes = 4;
+    private final String[] fontNames = {"宋体", "楷体", "隶书", "微软雅黑"};
+    private final Color background = new Color(255, 255, 255);
+    private final Random random = new Random();
+    private final String codes = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private String text;
 
     /**
@@ -95,7 +100,8 @@ public class VerificationCode {
             sb.append(s);
             graphics.setColor(randomColor());
             graphics.setFont(randomFont());
-            float x = i * width * 1.0f / 4;
+            //表示每一个验证码的x坐标
+            float x = i * width * 1.0f / verificationCodes;
             graphics.drawString(s, x, height - 8);
         }
         this.text = sb.toString();
@@ -108,6 +114,5 @@ public class VerificationCode {
     }
     public static void output(BufferedImage image, OutputStream out) throws IOException {
         ImageIO.write(image, "JPEG", out);
-
     }
 }
