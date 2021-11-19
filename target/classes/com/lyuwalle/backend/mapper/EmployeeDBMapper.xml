@@ -34,4 +34,10 @@
     <result column="endContract" jdbcType="DATE" property="endContract" />
     <result column="workAge" jdbcType="INTEGER" property="workAge" />
   </resultMap>
+
+  <select id="getMaxEmpId" resultType="java.lang.Integer">
+    select max(workID)
+    from employee
+  </select>
+
 </mapper>

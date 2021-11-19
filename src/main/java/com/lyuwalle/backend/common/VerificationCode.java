@@ -1,4 +1,4 @@
-package com.lyuwalle.backend.utils;
+package com.lyuwalle.backend.common;
 
 
 import javax.imageio.ImageIO;

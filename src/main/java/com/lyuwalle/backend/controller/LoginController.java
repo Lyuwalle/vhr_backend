@@ -1,7 +1,7 @@
 package com.lyuwalle.backend.controller;
 
 import com.lyuwalle.backend.common.RespBean;
-import com.lyuwalle.backend.utils.VerificationCode;
+import com.lyuwalle.backend.common.VerificationCode;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
