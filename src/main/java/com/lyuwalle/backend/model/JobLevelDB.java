@@ -14,8 +14,10 @@ public class JobLevelDB {
      */
     private String name;
 
+    @Column(name = "title_level")
     private String titleLevel;
 
+    @Column(name = "create_date")
     private Date createDate;
 
     private Boolean enabled;
@@ -53,7 +55,7 @@ public class JobLevelDB {
     }
 
     /**
-     * @return titleLevel
+     * @return title_level
      */
     public String getTitleLevel() {
         return titleLevel;
@@ -67,7 +69,7 @@ public class JobLevelDB {
     }
 
     /**
-     * @return createDate
+     * @return create_date
      */
     public Date getCreateDate() {
         return createDate;

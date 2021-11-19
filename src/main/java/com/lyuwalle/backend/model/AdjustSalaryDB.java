@@ -14,16 +14,19 @@ public class AdjustSalaryDB {
     /**
      * 调薪日期
      */
+    @Column(name = "as_date")
     private Date asDate;
 
     /**
-     * 调前薪资
+     * 调后薪资
      */
+    @Column(name = "before_salary")
     private Integer beforeSalary;
 
     /**
      * 调后薪资
      */
+    @Column(name = "after_salary")
     private Integer afterSalary;
 
     /**
@@ -67,7 +70,7 @@ public class AdjustSalaryDB {
     /**
      * 获取调薪日期
      *
-     * @return asDate - 调薪日期
+     * @return as_date - 调薪日期
      */
     public Date getAsDate() {
         return asDate;
@@ -83,18 +86,18 @@ public class AdjustSalaryDB {
     }
 
     /**
-     * 获取调前薪资
+     * 获取调后薪资
      *
-     * @return beforeSalary - 调前薪资
+     * @return before_salary - 调后薪资
      */
     public Integer getBeforeSalary() {
         return beforeSalary;
     }
 
     /**
-     * 设置调前薪资
+     * 设置调后薪资
      *
-     * @param beforeSalary 调前薪资
+     * @param beforeSalary 调后薪资
      */
     public void setBeforeSalary(Integer beforeSalary) {
         this.beforeSalary = beforeSalary;
@@ -103,7 +106,7 @@ public class AdjustSalaryDB {
     /**
      * 获取调后薪资
      *
-     * @return afterSalary - 调后薪资
+     * @return after_salary - 调后薪资
      */
     public Integer getAfterSalary() {
         return afterSalary;

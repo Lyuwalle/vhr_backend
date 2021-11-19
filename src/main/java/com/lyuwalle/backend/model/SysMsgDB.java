@@ -21,7 +21,7 @@ public class SysMsgDB {
     /**
      * 这条消息是给谁的
      */
-    private Integer hrId;
+    private Integer hrid;
 
     /**
      * 0 未读 1 已读
@@ -81,19 +81,19 @@ public class SysMsgDB {
     /**
      * 获取这条消息是给谁的
      *
-     * @return hrId - 这条消息是给谁的
+     * @return hrid - 这条消息是给谁的
      */
-    public Integer getHrId() {
-        return hrId;
+    public Integer getHrid() {
+        return hrid;
     }
 
     /**
      * 设置这条消息是给谁的
      *
-     * @param hrId 这条消息是给谁的
+     * @param hrid 这条消息是给谁的
      */
-    public void setHrId(Integer hrId) {
-        this.hrId = hrId;
+    public void setHrid(Integer hrid) {
+        this.hrid = hrid;
     }
 
     /**

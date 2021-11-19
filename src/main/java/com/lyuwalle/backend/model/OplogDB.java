@@ -12,6 +12,7 @@ public class OplogDB {
     /**
      * 添加日期
      */
+    @Column(name = "add_date")
     private Date addDate;
 
     /**
@@ -22,7 +23,7 @@ public class OplogDB {
     /**
      * 操作员ID
      */
-    private Integer hrId;
+    private Integer hrid;
 
     /**
      * @return id
@@ -41,7 +42,7 @@ public class OplogDB {
     /**
      * 获取添加日期
      *
-     * @return addDate - 添加日期
+     * @return add_date - 添加日期
      */
     public Date getAddDate() {
         return addDate;
@@ -77,18 +78,18 @@ public class OplogDB {
     /**
      * 获取操作员ID
      *
-     * @return hrId - 操作员ID
+     * @return hrid - 操作员ID
      */
-    public Integer getHrId() {
-        return hrId;
+    public Integer getHrid() {
+        return hrid;
     }
 
     /**
      * 设置操作员ID
      *
-     * @param hrId 操作员ID
+     * @param hrid 操作员ID
      */
-    public void setHrId(Integer hrId) {
-        this.hrId = hrId;
+    public void setHrid(Integer hrid) {
+        this.hrid = hrid;
     }
 }

@@ -13,6 +13,7 @@ public class MsgContentDB {
 
     private String message;
 
+    @Column(name = "create_date")
     private Date createDate;
 
     /**
@@ -58,7 +59,7 @@ public class MsgContentDB {
     }
 
     /**
-     * @return createDate
+     * @return create_date
      */
     public Date getCreateDate() {
         return createDate;

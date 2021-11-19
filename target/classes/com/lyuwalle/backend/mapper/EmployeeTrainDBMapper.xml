@@ -7,8 +7,8 @@
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="eid" jdbcType="INTEGER" property="eid" />
-    <result column="trainDate" jdbcType="DATE" property="trainDate" />
-    <result column="trainContent" jdbcType="VARCHAR" property="trainContent" />
+    <result column="train_date" jdbcType="DATE" property="trainDate" />
+    <result column="train_content" jdbcType="VARCHAR" property="trainContent" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
 </mapper>

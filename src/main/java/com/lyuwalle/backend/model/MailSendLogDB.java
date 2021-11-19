@@ -5,8 +5,10 @@ import javax.persistence.*;
 
 @Table(name = "mail_send_log")
 public class MailSendLogDB {
+    @Column(name = "msg_id")
     private String msgId;
 
+    @Column(name = "emp_id")
     private Integer empId;
 
     /**
@@ -14,6 +16,7 @@ public class MailSendLogDB {
      */
     private Integer status;
 
+    @Column(name = "route_key")
     private String routeKey;
 
     private String exchange;
@@ -26,14 +29,17 @@ public class MailSendLogDB {
     /**
      * 第一次重试时间
      */
+    @Column(name = "try_time")
     private Date tryTime;
 
+    @Column(name = "create_time")
     private Date createTime;
 
+    @Column(name = "update_time")
     private Date updateTime;
 
     /**
-     * @return msgId
+     * @return msg_id
      */
     public String getMsgId() {
         return msgId;
@@ -47,7 +53,7 @@ public class MailSendLogDB {
     }
 
     /**
-     * @return empId
+     * @return emp_id
      */
     public Integer getEmpId() {
         return empId;
@@ -79,7 +85,7 @@ public class MailSendLogDB {
     }
 
     /**
-     * @return routeKey
+     * @return route_key
      */
     public String getRouteKey() {
         return routeKey;
@@ -127,7 +133,7 @@ public class MailSendLogDB {
     /**
      * 获取第一次重试时间
      *
-     * @return tryTime - 第一次重试时间
+     * @return try_time - 第一次重试时间
      */
     public Date getTryTime() {
         return tryTime;
@@ -143,7 +149,7 @@ public class MailSendLogDB {
     }
 
     /**
-     * @return createTime
+     * @return create_time
      */
     public Date getCreateTime() {
         return createTime;
@@ -157,7 +163,7 @@ public class MailSendLogDB {
     }
 
     /**
-     * @return updateTime
+     * @return update_time
      */
     public Date getUpdateTime() {
         return updateTime;

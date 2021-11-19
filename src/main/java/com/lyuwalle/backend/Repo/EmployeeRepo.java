@@ -10,7 +10,6 @@ import com.lyuwalle.backend.utils.BeanCopyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
-import tk.mybatis.mapper.weekend.Weekend;
 
 import java.util.Date;
 import java.util.List;
@@ -39,14 +38,14 @@ public class EmployeeRepo {
         Page<EmployeeDB> employeeDbList = PageHelper.startPage(page, pageSize).doSelectPage(() -> {
             Example example = new Example(EmployeeDB.class);
             Example.Criteria criteria = example.createCriteria();
-            criteria.andLike("name", employee.getName())
+/*            criteria.andLike("name", employee.getName())
                     .andLike("school", employee.getSchool())
                     .andEqualTo("jobLevelId", employee.getJobLevelId())
                     .andEqualTo("workAge", employee.getWorkAge())
-                    .andEqualTo("workId", employee.getWorkID())
+                    .andEqualTo("workID", employee.getWorkID())
                     .andEqualTo("gender", employee.getGender())
                     .andGreaterThanOrEqualTo("beginDate", dateScope[0])
-                    .andLessThanOrEqualTo("beginDate", dateScope[1]);
+                    .andLessThanOrEqualTo("beginDate", dateScope[1]);*/
             example.and(criteria);
             employeeDBMapper.selectByExample(example);
         });

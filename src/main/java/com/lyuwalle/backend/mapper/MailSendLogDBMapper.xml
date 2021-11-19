@@ -5,14 +5,14 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <result column="msgId" jdbcType="VARCHAR" property="msgId" />
-    <result column="empId" jdbcType="INTEGER" property="empId" />
+    <result column="msg_id" jdbcType="VARCHAR" property="msgId" />
+    <result column="emp_id" jdbcType="INTEGER" property="empId" />
     <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="routeKey" jdbcType="VARCHAR" property="routeKey" />
+    <result column="route_key" jdbcType="VARCHAR" property="routeKey" />
     <result column="exchange" jdbcType="VARCHAR" property="exchange" />
     <result column="count" jdbcType="INTEGER" property="count" />
-    <result column="tryTime" jdbcType="DATE" property="tryTime" />
-    <result column="createTime" jdbcType="DATE" property="createTime" />
-    <result column="updateTime" jdbcType="DATE" property="updateTime" />
+    <result column="try_time" jdbcType="DATE" property="tryTime" />
+    <result column="create_time" jdbcType="DATE" property="createTime" />
+    <result column="update_time" jdbcType="DATE" property="updateTime" />
   </resultMap>
 </mapper>

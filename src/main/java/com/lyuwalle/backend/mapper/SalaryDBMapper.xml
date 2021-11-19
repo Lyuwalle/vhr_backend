@@ -6,18 +6,18 @@
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="basicSalary" jdbcType="INTEGER" property="basicSalary" />
+    <result column="basic_salary" jdbcType="INTEGER" property="basicSalary" />
     <result column="bonus" jdbcType="INTEGER" property="bonus" />
-    <result column="lunchSalary" jdbcType="INTEGER" property="lunchSalary" />
-    <result column="trafficSalary" jdbcType="INTEGER" property="trafficSalary" />
-    <result column="allSalary" jdbcType="INTEGER" property="allSalary" />
-    <result column="pensionBase" jdbcType="INTEGER" property="pensionBase" />
-    <result column="pensionPer" jdbcType="REAL" property="pensionPer" />
-    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
-    <result column="medicalBase" jdbcType="INTEGER" property="medicalBase" />
-    <result column="medicalPer" jdbcType="REAL" property="medicalPer" />
-    <result column="accumulationFundBase" jdbcType="INTEGER" property="accumulationFundBase" />
-    <result column="accumulationFundPer" jdbcType="REAL" property="accumulationFundPer" />
+    <result column="lunch_salary" jdbcType="INTEGER" property="lunchSalary" />
+    <result column="traffic_salary" jdbcType="INTEGER" property="trafficSalary" />
+    <result column="all_salary" jdbcType="INTEGER" property="allSalary" />
+    <result column="pension_base" jdbcType="INTEGER" property="pensionBase" />
+    <result column="pension_per" jdbcType="REAL" property="pensionPer" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="medical_base" jdbcType="INTEGER" property="medicalBase" />
+    <result column="medical_per" jdbcType="REAL" property="medicalPer" />
+    <result column="accumulation_fund_base" jdbcType="INTEGER" property="accumulationFundBase" />
+    <result column="accumulation_fund_per" jdbcType="REAL" property="accumulationFundPer" />
     <result column="name" jdbcType="VARCHAR" property="name" />
   </resultMap>
 </mapper>

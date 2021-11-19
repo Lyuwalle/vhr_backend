@@ -17,21 +17,25 @@ public class EmployeeEcDB {
     /**
      * 奖罚日期
      */
+    @Column(name = "ec_date")
     private Date ecDate;
 
     /**
      * 奖罚原因
      */
+    @Column(name = "ec_reason")
     private String ecReason;
 
     /**
      * 奖罚分
      */
+    @Column(name = "ec_point")
     private Integer ecPoint;
 
     /**
      * 奖罚类别，0：奖，1：罚
      */
+    @Column(name = "ec_type")
     private Integer ecType;
 
     /**
@@ -74,7 +78,7 @@ public class EmployeeEcDB {
     /**
      * 获取奖罚日期
      *
-     * @return ecDate - 奖罚日期
+     * @return ec_date - 奖罚日期
      */
     public Date getEcDate() {
         return ecDate;
@@ -92,7 +96,7 @@ public class EmployeeEcDB {
     /**
      * 获取奖罚原因
      *
-     * @return ecReason - 奖罚原因
+     * @return ec_reason - 奖罚原因
      */
     public String getEcReason() {
         return ecReason;
@@ -110,7 +114,7 @@ public class EmployeeEcDB {
     /**
      * 获取奖罚分
      *
-     * @return ecPoint - 奖罚分
+     * @return ec_point - 奖罚分
      */
     public Integer getEcPoint() {
         return ecPoint;
@@ -128,7 +132,7 @@ public class EmployeeEcDB {
     /**
      * 获取奖罚类别，0：奖，1：罚
      *
-     * @return ecType - 奖罚类别，0：奖，1：罚
+     * @return ec_type - 奖罚类别，0：奖，1：罚
      */
     public Integer getEcType() {
         return ecType;

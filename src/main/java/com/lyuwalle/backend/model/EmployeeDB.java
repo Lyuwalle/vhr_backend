@@ -30,6 +30,7 @@ public class EmployeeDB {
     /**
      * 身份证号
      */
+    @Column(name = "id_card")
     private String idCard;
 
     /**
@@ -40,16 +41,19 @@ public class EmployeeDB {
     /**
      * 民族
      */
+    @Column(name = "nation_id")
     private Integer nationId;
 
     /**
      * 籍贯
      */
+    @Column(name = "native_place")
     private String nativePlace;
 
     /**
      * 政治面貌
      */
+    @Column(name = "politic_id")
     private Integer politicId;
 
     /**
@@ -70,26 +74,31 @@ public class EmployeeDB {
     /**
      * 所属部门
      */
+    @Column(name = "department_id")
     private Integer departmentId;
 
     /**
      * 职称ID
      */
+    @Column(name = "job_level_id")
     private Integer jobLevelId;
 
     /**
      * 职位ID
      */
+    @Column(name = "pos_id")
     private Integer posId;
 
     /**
      * 聘用形式
      */
+    @Column(name = "engage_form")
     private String engageForm;
 
     /**
      * 最高学历
      */
+    @Column(name = "tiptop_degree")
     private String tiptopDegree;
 
     /**
@@ -105,46 +114,55 @@ public class EmployeeDB {
     /**
      * 入职日期
      */
+    @Column(name = "begin_date")
     private Date beginDate;
 
     /**
      * 在职状态
      */
+    @Column(name = "work_state")
     private String workState;
 
     /**
      * 工号
      */
-    private String workID;
+    @Column(name = "work_id")
+    private String workId;
 
     /**
      * 合同期限
      */
+    @Column(name = "contract_term")
     private Double contractTerm;
 
     /**
      * 转正日期
      */
+    @Column(name = "conversion_time")
     private Date conversionTime;
 
     /**
      * 离职日期
      */
+    @Column(name = "not_work_date")
     private Date notWorkDate;
 
     /**
      * 合同起始日期
      */
+    @Column(name = "begin_contract")
     private Date beginContract;
 
     /**
      * 合同终止日期
      */
+    @Column(name = "end_contract")
     private Date endContract;
 
     /**
      * 工龄
      */
+    @Column(name = "work_age")
     private Integer workAge;
 
     /**
@@ -222,7 +240,7 @@ public class EmployeeDB {
     /**
      * 获取身份证号
      *
-     * @return idCard - 身份证号
+     * @return id_card - 身份证号
      */
     public String getIdCard() {
         return idCard;
@@ -258,7 +276,7 @@ public class EmployeeDB {
     /**
      * 获取民族
      *
-     * @return nationId - 民族
+     * @return nation_id - 民族
      */
     public Integer getNationId() {
         return nationId;
@@ -276,7 +294,7 @@ public class EmployeeDB {
     /**
      * 获取籍贯
      *
-     * @return nativePlace - 籍贯
+     * @return native_place - 籍贯
      */
     public String getNativePlace() {
         return nativePlace;
@@ -294,7 +312,7 @@ public class EmployeeDB {
     /**
      * 获取政治面貌
      *
-     * @return politicId - 政治面貌
+     * @return politic_id - 政治面貌
      */
     public Integer getPoliticId() {
         return politicId;
@@ -366,7 +384,7 @@ public class EmployeeDB {
     /**
      * 获取所属部门
      *
-     * @return departmentId - 所属部门
+     * @return department_id - 所属部门
      */
     public Integer getDepartmentId() {
         return departmentId;
@@ -384,7 +402,7 @@ public class EmployeeDB {
     /**
      * 获取职称ID
      *
-     * @return jobLevelId - 职称ID
+     * @return job_level_id - 职称ID
      */
     public Integer getJobLevelId() {
         return jobLevelId;
@@ -402,7 +420,7 @@ public class EmployeeDB {
     /**
      * 获取职位ID
      *
-     * @return posId - 职位ID
+     * @return pos_id - 职位ID
      */
     public Integer getPosId() {
         return posId;
@@ -420,7 +438,7 @@ public class EmployeeDB {
     /**
      * 获取聘用形式
      *
-     * @return engageForm - 聘用形式
+     * @return engage_form - 聘用形式
      */
     public String getEngageForm() {
         return engageForm;
@@ -438,7 +456,7 @@ public class EmployeeDB {
     /**
      * 获取最高学历
      *
-     * @return tiptopDegree - 最高学历
+     * @return tiptop_degree - 最高学历
      */
     public String getTiptopDegree() {
         return tiptopDegree;
@@ -492,7 +510,7 @@ public class EmployeeDB {
     /**
      * 获取入职日期
      *
-     * @return beginDate - 入职日期
+     * @return begin_date - 入职日期
      */
     public Date getBeginDate() {
         return beginDate;
@@ -510,7 +528,7 @@ public class EmployeeDB {
     /**
      * 获取在职状态
      *
-     * @return workState - 在职状态
+     * @return work_state - 在职状态
      */
     public String getWorkState() {
         return workState;
@@ -528,25 +546,25 @@ public class EmployeeDB {
     /**
      * 获取工号
      *
-     * @return workID - 工号
+     * @return work_id - 工号
      */
-    public String getWorkID() {
-        return workID;
+    public String getWorkId() {
+        return workId;
     }
 
     /**
      * 设置工号
      *
-     * @param workID 工号
+     * @param workId 工号
      */
-    public void setWorkID(String workID) {
-        this.workID = workID;
+    public void setWorkId(String workId) {
+        this.workId = workId;
     }
 
     /**
      * 获取合同期限
      *
-     * @return contractTerm - 合同期限
+     * @return contract_term - 合同期限
      */
     public Double getContractTerm() {
         return contractTerm;
@@ -564,7 +582,7 @@ public class EmployeeDB {
     /**
      * 获取转正日期
      *
-     * @return conversionTime - 转正日期
+     * @return conversion_time - 转正日期
      */
     public Date getConversionTime() {
         return conversionTime;
@@ -582,7 +600,7 @@ public class EmployeeDB {
     /**
      * 获取离职日期
      *
-     * @return notWorkDate - 离职日期
+     * @return not_work_date - 离职日期
      */
     public Date getNotWorkDate() {
         return notWorkDate;
@@ -600,7 +618,7 @@ public class EmployeeDB {
     /**
      * 获取合同起始日期
      *
-     * @return beginContract - 合同起始日期
+     * @return begin_contract - 合同起始日期
      */
     public Date getBeginContract() {
         return beginContract;
@@ -618,7 +636,7 @@ public class EmployeeDB {
     /**
      * 获取合同终止日期
      *
-     * @return endContract - 合同终止日期
+     * @return end_contract - 合同终止日期
      */
     public Date getEndContract() {
         return endContract;
@@ -636,7 +654,7 @@ public class EmployeeDB {
     /**
      * 获取工龄
      *
-     * @return workAge - 工龄
+     * @return work_age - 工龄
      */
     public Integer getWorkAge() {
         return workAge;

@@ -7,6 +7,6 @@
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="nameZh" jdbcType="VARCHAR" property="nameZh" />
+    <result column="name_zh" jdbcType="VARCHAR" property="nameZh" />
   </resultMap>
 </mapper>

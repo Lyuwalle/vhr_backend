@@ -14,16 +14,19 @@ public class EmployeeRemoveDB {
     /**
      * 调动后部门
      */
+    @Column(name = "after_dep_id")
     private Integer afterDepId;
 
     /**
      * 调动后职位
      */
+    @Column(name = "after_job_id")
     private Integer afterJobId;
 
     /**
      * 调动日期
      */
+    @Column(name = "remove_date")
     private Date removeDate;
 
     /**
@@ -64,7 +67,7 @@ public class EmployeeRemoveDB {
     /**
      * 获取调动后部门
      *
-     * @return afterDepId - 调动后部门
+     * @return after_dep_id - 调动后部门
      */
     public Integer getAfterDepId() {
         return afterDepId;
@@ -82,7 +85,7 @@ public class EmployeeRemoveDB {
     /**
      * 获取调动后职位
      *
-     * @return afterJobId - 调动后职位
+     * @return after_job_id - 调动后职位
      */
     public Integer getAfterJobId() {
         return afterJobId;
@@ -100,7 +103,7 @@ public class EmployeeRemoveDB {
     /**
      * 获取调动日期
      *
-     * @return removeDate - 调动日期
+     * @return remove_date - 调动日期
      */
     public Date getRemoveDate() {
         return removeDate;

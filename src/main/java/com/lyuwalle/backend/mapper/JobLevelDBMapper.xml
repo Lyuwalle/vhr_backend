@@ -7,8 +7,8 @@
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="titleLevel" jdbcType="CHAR" property="titleLevel" />
-    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="title_level" jdbcType="CHAR" property="titleLevel" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="enabled" jdbcType="BIT" property="enabled" />
   </resultMap>
 </mapper>

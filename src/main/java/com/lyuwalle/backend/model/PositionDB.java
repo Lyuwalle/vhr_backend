@@ -14,6 +14,7 @@ public class PositionDB {
      */
     private String name;
 
+    @Column(name = "create_date")
     private Date createDate;
 
     private Boolean enabled;
@@ -51,7 +52,7 @@ public class PositionDB {
     }
 
     /**
-     * @return createDate
+     * @return create_date
      */
     public Date getCreateDate() {
         return createDate;

@@ -7,9 +7,9 @@
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="eid" jdbcType="INTEGER" property="eid" />
-    <result column="afterDepId" jdbcType="INTEGER" property="afterDepId" />
-    <result column="afterJobId" jdbcType="INTEGER" property="afterJobId" />
-    <result column="removeDate" jdbcType="DATE" property="removeDate" />
+    <result column="after_dep_id" jdbcType="INTEGER" property="afterDepId" />
+    <result column="after_job_id" jdbcType="INTEGER" property="afterJobId" />
+    <result column="remove_date" jdbcType="DATE" property="removeDate" />
     <result column="reason" jdbcType="VARCHAR" property="reason" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>

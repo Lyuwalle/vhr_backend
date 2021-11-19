@@ -14,16 +14,19 @@ public class AppraiseDB {
     /**
      * 考评日期
      */
+    @Column(name = "app_date")
     private Date appDate;
 
     /**
      * 考评结果
      */
+    @Column(name = "app_result")
     private String appResult;
 
     /**
      * 考评内容
      */
+    @Column(name = "app_content")
     private String appContent;
 
     /**
@@ -62,7 +65,7 @@ public class AppraiseDB {
     /**
      * 获取考评日期
      *
-     * @return appDate - 考评日期
+     * @return app_date - 考评日期
      */
     public Date getAppDate() {
         return appDate;
@@ -80,7 +83,7 @@ public class AppraiseDB {
     /**
      * 获取考评结果
      *
-     * @return appResult - 考评结果
+     * @return app_result - 考评结果
      */
     public String getAppResult() {
         return appResult;
@@ -98,7 +101,7 @@ public class AppraiseDB {
     /**
      * 获取考评内容
      *
-     * @return appContent - 考评内容
+     * @return app_content - 考评内容
      */
     public String getAppContent() {
         return appContent;

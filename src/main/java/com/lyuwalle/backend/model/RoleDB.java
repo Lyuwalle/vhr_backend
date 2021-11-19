@@ -13,6 +13,7 @@ public class RoleDB {
     /**
      * 角色名称
      */
+    @Column(name = "name_zh")
     private String nameZh;
 
     /**
@@ -46,7 +47,7 @@ public class RoleDB {
     /**
      * 获取角色名称
      *
-     * @return nameZh - 角色名称
+     * @return name_zh - 角色名称
      */
     public String getNameZh() {
         return nameZh;

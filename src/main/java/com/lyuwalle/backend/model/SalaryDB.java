@@ -12,6 +12,7 @@ public class SalaryDB {
     /**
      * 基本工资
      */
+    @Column(name = "basic_salary")
     private Integer basicSalary;
 
     /**
@@ -22,51 +23,61 @@ public class SalaryDB {
     /**
      * 午餐补助
      */
+    @Column(name = "lunch_salary")
     private Integer lunchSalary;
 
     /**
      * 交通补助
      */
+    @Column(name = "traffic_salary")
     private Integer trafficSalary;
 
     /**
      * 应发工资
      */
+    @Column(name = "all_salary")
     private Integer allSalary;
 
     /**
      * 养老金基数
      */
+    @Column(name = "pension_base")
     private Integer pensionBase;
 
     /**
      * 养老金比率
      */
+    @Column(name = "pension_per")
     private Float pensionPer;
 
     /**
      * 启用时间
      */
+    @Column(name = "create_date")
     private Date createDate;
 
     /**
      * 医疗基数
      */
+    @Column(name = "medical_base")
     private Integer medicalBase;
 
     /**
      * 医疗保险比率
      */
+    @Column(name = "medical_per")
     private Float medicalPer;
 
     /**
      * 公积金基数
      */
+    @Column(name = "accumulation_fund_base")
     private Integer accumulationFundBase;
 
     /**
      * 公积金比率
      */
+    @Column(name = "accumulation_fund_per")
     private Float accumulationFundPer;
 
     private String name;
@@ -88,7 +99,7 @@ public class SalaryDB {
     /**
      * 获取基本工资
      *
-     * @return basicSalary - 基本工资
+     * @return basic_salary - 基本工资
      */
     public Integer getBasicSalary() {
         return basicSalary;
@@ -124,7 +135,7 @@ public class SalaryDB {
     /**
      * 获取午餐补助
      *
-     * @return lunchSalary - 午餐补助
+     * @return lunch_salary - 午餐补助
      */
     public Integer getLunchSalary() {
         return lunchSalary;
@@ -142,7 +153,7 @@ public class SalaryDB {
     /**
      * 获取交通补助
      *
-     * @return trafficSalary - 交通补助
+     * @return traffic_salary - 交通补助
      */
     public Integer getTrafficSalary() {
         return trafficSalary;
@@ -160,7 +171,7 @@ public class SalaryDB {
     /**
      * 获取应发工资
      *
-     * @return allSalary - 应发工资
+     * @return all_salary - 应发工资
      */
     public Integer getAllSalary() {
         return allSalary;
@@ -178,7 +189,7 @@ public class SalaryDB {
     /**
      * 获取养老金基数
      *
-     * @return pensionBase - 养老金基数
+     * @return pension_base - 养老金基数
      */
     public Integer getPensionBase() {
         return pensionBase;
@@ -196,7 +207,7 @@ public class SalaryDB {
     /**
      * 获取养老金比率
      *
-     * @return pensionPer - 养老金比率
+     * @return pension_per - 养老金比率
      */
     public Float getPensionPer() {
         return pensionPer;
@@ -214,7 +225,7 @@ public class SalaryDB {
     /**
      * 获取启用时间
      *
-     * @return createDate - 启用时间
+     * @return create_date - 启用时间
      */
     public Date getCreateDate() {
         return createDate;
@@ -232,7 +243,7 @@ public class SalaryDB {
     /**
      * 获取医疗基数
      *
-     * @return medicalBase - 医疗基数
+     * @return medical_base - 医疗基数
      */
     public Integer getMedicalBase() {
         return medicalBase;
@@ -250,7 +261,7 @@ public class SalaryDB {
     /**
      * 获取医疗保险比率
      *
-     * @return medicalPer - 医疗保险比率
+     * @return medical_per - 医疗保险比率
      */
     public Float getMedicalPer() {
         return medicalPer;
@@ -268,7 +279,7 @@ public class SalaryDB {
     /**
      * 获取公积金基数
      *
-     * @return accumulationFundBase - 公积金基数
+     * @return accumulation_fund_base - 公积金基数
      */
     public Integer getAccumulationFundBase() {
         return accumulationFundBase;
@@ -286,7 +297,7 @@ public class SalaryDB {
     /**
      * 获取公积金比率
      *
-     * @return accumulationFundPer - 公积金比率
+     * @return accumulation_fund_per - 公积金比率
      */
     public Float getAccumulationFundPer() {
         return accumulationFundPer;

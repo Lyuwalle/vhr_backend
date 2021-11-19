@@ -7,9 +7,9 @@
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="parentId" jdbcType="INTEGER" property="parentId" />
-    <result column="depPath" jdbcType="VARCHAR" property="depPath" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="dep_path" jdbcType="VARCHAR" property="depPath" />
     <result column="enabled" jdbcType="BIT" property="enabled" />
-    <result column="isParent" jdbcType="BIT" property="isParent" />
+    <result column="is_parent" jdbcType="BIT" property="isParent" />
   </resultMap>
 </mapper>

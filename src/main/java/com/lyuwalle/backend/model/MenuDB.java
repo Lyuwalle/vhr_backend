@@ -16,12 +16,16 @@ public class MenuDB {
 
     private String name;
 
+    @Column(name = "icon_cls")
     private String iconCls;
 
+    @Column(name = "keep_alive")
     private Boolean keepAlive;
 
+    @Column(name = "require_auth")
     private Boolean requireAuth;
 
+    @Column(name = "parent_id")
     private Integer parentId;
 
     private Boolean enabled;
@@ -97,7 +101,7 @@ public class MenuDB {
     }
 
     /**
-     * @return iconCls
+     * @return icon_cls
      */
     public String getIconCls() {
         return iconCls;
@@ -111,7 +115,7 @@ public class MenuDB {
     }
 
     /**
-     * @return keepAlive
+     * @return keep_alive
      */
     public Boolean getKeepAlive() {
         return keepAlive;
@@ -125,7 +129,7 @@ public class MenuDB {
     }
 
     /**
-     * @return requireAuth
+     * @return require_auth
      */
     public Boolean getRequireAuth() {
         return requireAuth;
@@ -139,7 +143,7 @@ public class MenuDB {
     }
 
     /**
-     * @return parentId
+     * @return parent_id
      */
     public Integer getParentId() {
         return parentId;

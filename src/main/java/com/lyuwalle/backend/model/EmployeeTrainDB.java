@@ -17,11 +17,13 @@ public class EmployeeTrainDB {
     /**
      * 培训日期
      */
+    @Column(name = "train_date")
     private Date trainDate;
 
     /**
      * 培训内容
      */
+    @Column(name = "train_content")
     private String trainContent;
 
     /**
@@ -64,7 +66,7 @@ public class EmployeeTrainDB {
     /**
      * 获取培训日期
      *
-     * @return trainDate - 培训日期
+     * @return train_date - 培训日期
      */
     public Date getTrainDate() {
         return trainDate;
@@ -82,7 +84,7 @@ public class EmployeeTrainDB {
     /**
      * 获取培训内容
      *
-     * @return trainContent - 培训内容
+     * @return train_content - 培训内容
      */
     public String getTrainContent() {
         return trainContent;

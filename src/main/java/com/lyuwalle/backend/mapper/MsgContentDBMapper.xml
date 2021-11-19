@@ -8,6 +8,6 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="message" jdbcType="VARCHAR" property="message" />
-    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
   </resultMap>
 </mapper>

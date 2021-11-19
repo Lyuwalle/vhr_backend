@@ -8,7 +8,7 @@ public class HrRoleDB {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer hrId;
+    private Integer hrid;
 
     private Integer rid;
 
@@ -27,17 +27,17 @@ public class HrRoleDB {
     }
 
     /**
-     * @return hrId
+     * @return hrid
      */
-    public Integer getHrId() {
-        return hrId;
+    public Integer getHrid() {
+        return hrid;
     }
 
     /**
-     * @param hrId
+     * @param hrid
      */
-    public void setHrId(Integer hrId) {
-        this.hrId = hrId;
+    public void setHrid(Integer hrid) {
+        this.hrid = hrid;
     }
 
     /**

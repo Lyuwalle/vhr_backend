@@ -7,9 +7,9 @@
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="eid" jdbcType="INTEGER" property="eid" />
-    <result column="appDate" jdbcType="DATE" property="appDate" />
-    <result column="appResult" jdbcType="VARCHAR" property="appResult" />
-    <result column="appContent" jdbcType="VARCHAR" property="appContent" />
+    <result column="app_date" jdbcType="DATE" property="appDate" />
+    <result column="app_result" jdbcType="VARCHAR" property="appResult" />
+    <result column="app_content" jdbcType="VARCHAR" property="appContent" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
 </mapper>

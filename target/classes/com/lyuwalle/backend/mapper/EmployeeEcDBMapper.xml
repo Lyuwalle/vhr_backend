@@ -7,10 +7,10 @@
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="eid" jdbcType="INTEGER" property="eid" />
-    <result column="ecDate" jdbcType="DATE" property="ecDate" />
-    <result column="ecReason" jdbcType="VARCHAR" property="ecReason" />
-    <result column="ecPoint" jdbcType="INTEGER" property="ecPoint" />
-    <result column="ecType" jdbcType="INTEGER" property="ecType" />
+    <result column="ec_date" jdbcType="DATE" property="ecDate" />
+    <result column="ec_reason" jdbcType="VARCHAR" property="ecReason" />
+    <result column="ec_point" jdbcType="INTEGER" property="ecPoint" />
+    <result column="ec_type" jdbcType="INTEGER" property="ecType" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
 </mapper>

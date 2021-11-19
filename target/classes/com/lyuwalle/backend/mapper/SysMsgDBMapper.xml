@@ -8,7 +8,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="mid" jdbcType="INTEGER" property="mid" />
     <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="hrid" jdbcType="INTEGER" property="hrId" />
+    <result column="hrid" jdbcType="INTEGER" property="hrid" />
     <result column="state" jdbcType="INTEGER" property="state" />
   </resultMap>
 </mapper>

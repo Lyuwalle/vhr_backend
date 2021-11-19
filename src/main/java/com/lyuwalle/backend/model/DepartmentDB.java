@@ -13,12 +13,15 @@ public class DepartmentDB {
      */
     private String name;
 
+    @Column(name = "parent_id")
     private Integer parentId;
 
+    @Column(name = "dep_path")
     private String depPath;
 
     private Boolean enabled;
 
+    @Column(name = "is_parent")
     private Boolean isParent;
 
     /**
@@ -54,7 +57,7 @@ public class DepartmentDB {
     }
 
     /**
-     * @return parentId
+     * @return parent_id
      */
     public Integer getParentId() {
         return parentId;
@@ -68,7 +71,7 @@ public class DepartmentDB {
     }
 
     /**
-     * @return depPath
+     * @return dep_path
      */
     public String getDepPath() {
         return depPath;
@@ -96,7 +99,7 @@ public class DepartmentDB {
     }
 
     /**
-     * @return isParent
+     * @return is_parent
      */
     public Boolean getIsParent() {
         return isParent;
