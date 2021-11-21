@@ -46,7 +46,7 @@ public class EmployeeRepo {
                     .andEqualTo("gender", employee.getGender())
                     .andGreaterThanOrEqualTo("beginDate", dateScope[0])
                     .andLessThanOrEqualTo("beginDate", dateScope[1]);*/
-            example.and(criteria);
+            example.or(criteria);
             employeeDBMapper.selectByExample(example);
         });
         List<Employee> employeeList = employeeDbList.stream().map(employeeDB -> BeanCopyUtil.copy(employeeDB, Employee.class)).collect(Collectors.toList());
