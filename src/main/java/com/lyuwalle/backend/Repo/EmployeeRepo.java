@@ -38,16 +38,24 @@ public class EmployeeRepo {
         Page<EmployeeDB> employeeDbList = PageHelper.startPage(page, pageSize).doSelectPage(() -> {
             Example example = new Example(EmployeeDB.class);
             Example.Criteria criteria = example.createCriteria();
-/*            criteria.andLike("name", employee.getName())
+            criteria.andLike("name", employee.getName())
                     .andLike("school", employee.getSchool())
                     .andEqualTo("jobLevelId", employee.getJobLevelId())
                     .andEqualTo("workAge", employee.getWorkAge())
-                    .andEqualTo("workID", employee.getWorkID())
+                    .andEqualTo("workId", employee.getWorkId())
                     .andEqualTo("gender", employee.getGender())
                     .andGreaterThanOrEqualTo("beginDate", dateScope[0])
-                    .andLessThanOrEqualTo("beginDate", dateScope[1]);*/
-            example.or(criteria);
+                    .andLessThanOrEqualTo("beginDate", dateScope[1]);
+            example.and(criteria);
             employeeDBMapper.selectByExample(example);
+        });
+        List<Employee> employeeList = employeeDbList.stream().map(employeeDB -> BeanCopyUtil.copy(employeeDB, Employee.class)).collect(Collectors.toList());
+        return new ListResult<>(employeeDbList.getTotal(), employeeList);
+    }
+
+    public ListResult<Employee> getAllEmployeeByPage(Integer page, Integer pageSize) {
+        Page<EmployeeDB> employeeDbList = PageHelper.startPage(page, pageSize).doSelectPage(() -> {
+            employeeDBMapper.selectAll();
         });
         List<Employee> employeeList = employeeDbList.stream().map(employeeDB -> BeanCopyUtil.copy(employeeDB, Employee.class)).collect(Collectors.toList());
         return new ListResult<>(employeeDbList.getTotal(), employeeList);

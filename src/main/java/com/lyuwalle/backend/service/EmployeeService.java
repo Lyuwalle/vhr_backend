@@ -21,6 +21,10 @@ public class EmployeeService {
         return employeeRepo.getEmployeeByPage(page, pageSize, employee, dateScope);
     }
 
+    public ListResult<Employee> getAllEmployeeByPage(Integer page, Integer pageSize) {
+        return employeeRepo.getAllEmployeeByPage(page, pageSize);
+    }
+
     public int addEmployee(Employee employee) {
         return employeeRepo.addEmployee(employee);
     }

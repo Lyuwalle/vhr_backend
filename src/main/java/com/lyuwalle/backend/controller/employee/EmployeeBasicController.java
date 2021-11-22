@@ -48,6 +48,19 @@ public class EmployeeBasicController {
     }
 
     /**
+     * 分页查看所有员工的资料
+     *
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    @GetMapping("/allEmp")
+    public ListResult<Employee> getAllEmployeeByPage(@RequestParam(defaultValue = "1") Integer page,
+                                                     @RequestParam(defaultValue = "10") Integer pageSize) {
+        return employeeService.getAllEmployeeByPage(page, pageSize);
+    }
+
+    /**
      * 添加员工
      *
      * @param employee

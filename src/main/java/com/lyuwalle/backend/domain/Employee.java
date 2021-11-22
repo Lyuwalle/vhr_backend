@@ -112,7 +112,7 @@ public class Employee {
     /**
      * 工号
      */
-    private String workID;
+    private String workId;
 
     /**
      * 合同期限
