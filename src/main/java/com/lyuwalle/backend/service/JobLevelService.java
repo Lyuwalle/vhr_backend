@@ -19,4 +19,20 @@ public class JobLevelService {
     public List<JobLevel> getAllJobLevels() {
         return jobLevelRepo.getAllJobLevels();
     }
+
+    public int addJobLevel(JobLevel jobLevel) {
+        return jobLevelRepo.addJobLevel(jobLevel);
+    }
+
+    public int updateJobLevel(JobLevel jobLevel) {
+        return jobLevelRepo.updateJobLevel(jobLevel);
+    }
+
+    public int deleteJobLevelById(Integer id) {
+        return jobLevelRepo.deleteJobLevelById(id);
+    }
+
+    public int deleteJobLevelByIds(Integer[] ids) {
+        return jobLevelRepo.deleteJobLevelByIds(ids);
+    }
 }

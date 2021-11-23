@@ -1,5 +1,8 @@
 package com.lyuwalle.backend.common;
 
+/**
+ * @author lyuxiyang
+ */
 public class BaseException extends RuntimeException {
     private int code = 500;
 

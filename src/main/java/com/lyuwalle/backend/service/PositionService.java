@@ -19,4 +19,20 @@ public class PositionService {
     public List<Position> getAllPositions() {
         return positionRepo.getAllPositions();
     }
+
+    public int addPosition(Position position) {
+        return positionRepo.addPosition(position);
+    }
+
+    public int updatePosition(Position position) {
+        return positionRepo.updatePosition(position);
+    }
+
+    public int deletePositionById(Integer id) {
+        return positionRepo.deletePositionById(id);
+    }
+
+    public int deletePositionByIds(Integer[] ids) {
+        return positionRepo.deletePositionByIds(ids);
+    }
 }

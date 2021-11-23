@@ -28,17 +28,17 @@ public class HrController {
     @PutMapping("/")
     public RespBean updateHr(@RequestBody Hr hr) {
         if (hrService.updateHr(hr) == 1) {
-            return RespBean.ok("update successfully!");
+            return RespBean.ok("更新用户成功");
         }
-        return RespBean.error("update failed!");
+        return RespBean.error("更新用户失败");
     }
 
     @DeleteMapping("/{id}")
     public RespBean deleteHrById(@PathVariable Integer id) {
         if(hrService.deleteHrById(id) == 1) {
-            return RespBean.ok("delete successfully!");
+            return RespBean.ok("删除用户成功");
         }
-        return RespBean.error("delete failed!");
+        return RespBean.error("删除用户失败");
     }
 
     @GetMapping("/roles")
@@ -49,9 +49,9 @@ public class HrController {
     @PutMapping("/role")
     public RespBean updateHrRole (Integer hrid, Integer[] rids) {
         if (hrService.updateHrRole(hrid, rids)) {
-            return RespBean.ok("update successfully!");
+            return RespBean.ok("更新用户角色成功");
         }
-        return RespBean.error("update failed!");
+        return RespBean.error("更新用户角色失败");
     }
 
 

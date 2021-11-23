@@ -16,4 +16,12 @@ public class RoleService {
     public List<Role> getAllRoles() {
         return roleRepo.getAllRoles();
     }
+
+    public int addRole(Role role) {
+        return roleRepo.addRole(role);
+    }
+
+    public int deleteRoleById(Integer rid) {
+        return roleRepo.deleteRoleById(rid);
+    }
 }
