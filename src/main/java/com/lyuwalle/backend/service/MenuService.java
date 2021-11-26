@@ -1,7 +1,10 @@
 package com.lyuwalle.backend.service;
 
 import com.lyuwalle.backend.Repo.MenuRepo;
+import com.lyuwalle.backend.domain.Hr;
 import com.lyuwalle.backend.domain.Menu;
+import com.lyuwalle.backend.domain.Role;
+import com.lyuwalle.backend.utils.HrUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +26,9 @@ public class MenuService {
 
     public boolean updateMenuRole(Integer rid, Integer[] mids) {
         return false;
+    }
+
+    public List<Menu> getMenusByHrId() {
+        return menuRepo.getMenusByHrId();
     }
 }
