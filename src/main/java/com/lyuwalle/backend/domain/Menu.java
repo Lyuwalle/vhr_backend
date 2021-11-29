@@ -2,6 +2,8 @@ package com.lyuwalle.backend.domain;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class Menu {
 
@@ -17,11 +19,14 @@ public class Menu {
 
     private String iconCls;
 
-    private Boolean keepAlive;
-
-    private Boolean requireAuth;
+    private Meta meta;
 
     private Integer parentId;
 
     private Boolean enabled;
+
+    /**
+     * 子菜单
+     */
+    private List<Menu> children;
 }

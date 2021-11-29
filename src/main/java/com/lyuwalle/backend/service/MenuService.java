@@ -28,6 +28,10 @@ public class MenuService {
         return false;
     }
 
+    /**
+     * 根据Hr的id拿到菜单List
+     * @return
+     */
     public List<Menu> getMenusByHrId() {
         return menuRepo.getMenusByHrId();
     }
