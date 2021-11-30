@@ -3,7 +3,6 @@ package com.lyuwalle.backend.Repo;
 import com.lyuwalle.backend.domain.Hr;
 import com.lyuwalle.backend.domain.Menu;
 import com.lyuwalle.backend.domain.Meta;
-import com.lyuwalle.backend.domain.Role;
 import com.lyuwalle.backend.mapper.HrRoleDBMapper;
 import com.lyuwalle.backend.mapper.MenuDBMapper;
 import com.lyuwalle.backend.mapper.MenuRoleDBMapper;
@@ -28,6 +27,9 @@ public class MenuRepo {
     private MenuRoleDBMapper menuRoleDBMapper;
     @Autowired
     private HrRoleDBMapper hrRoleDBMapper;
+
+    private static final int startMid = 2;
+    private static final int endMid = 6;
 
 
     public List<Menu> getAllMenus() {
@@ -66,37 +68,46 @@ public class MenuRepo {
                 }
             });
         });
-
-        //@Todo menuId中的每一个menuId对应的menu的parentId也要包含进来，子菜单有了，父菜单自然也有了
-        List<MenuDB> menuDBList = new ArrayList<>();
-        menuIdList.forEach(mid -> {
+        //根据所有menuId获取parentId
+        List<Integer> parentIdList = menuIdList.stream().map(menuId -> {
             MenuDB menuDB = new MenuDB();
-            menuDB.setId(mid);
-            MenuDB menuDB1 = menuDBMapper.selectOne(menuDB);
-            menuDBList.add(menuDB1);
-        });
+            menuDB.setId(menuId);
+            return menuDBMapper.selectOne(menuDB).getParentId();
+        }).distinct().collect(Collectors.toList());
 
-        return menuDBList.stream().map(menuDB -> {
-            Menu menu = BeanCopyUtil.copy(menuDB, Menu.class);
-            Meta meta = new Meta();
-            meta.setKeepAlive(menuDB.getKeepAlive());
-            meta.setRequireAuth(menuDB.getRequireAuth());
-            menu.setMeta(meta);
-            Integer mid = menuDB.getId();
-            MenuDB menuDB1 = new MenuDB();
-            menuDB1.setParentId(mid);
-            List<MenuDB> childrenMenuDB = menuDBMapper.select(menuDB1);
-            List<Menu> children = childrenMenuDB.stream().map(child -> {
-                Menu menu1 = BeanCopyUtil.copy(child, Menu.class);
-                Meta meta1 = new Meta();
-                meta1.setKeepAlive(child.getKeepAlive());
-                meta1.setRequireAuth(child.getRequireAuth());
-                menu1.setMeta(meta1);
-                return menu1;
-            }).collect(Collectors.toList());
-
-            menu.setChildren(children);
-            return menu;
-        }).collect(Collectors.toList());
+        //Todo menuId中的每一个menuId对应的menu的parentId也要包含进来，子菜单有了，父菜单自然也有了
+        //Todo 最多只有二级菜单，对一级菜单枚举即可
+        //FIXME
+        List<Menu> menus = new ArrayList<>();
+        for (int mid = startMid; mid <= endMid; mid ++) {
+            if (parentIdList.contains(mid)) {
+                MenuDB menuDB = new MenuDB();
+                menuDB.setId(mid);
+                menuDB = menuDBMapper.selectOne(menuDB);
+                Menu menu = BeanCopyUtil.copy(menuDB, Menu.class);
+                Meta meta = new Meta();
+                meta.setRequireAuth(menuDB.getRequireAuth());
+                meta.setKeepAlive(menuDB.getKeepAlive());
+                menu.setMeta(meta);
+                List<Menu> childrenMenu = new ArrayList<>();
+                int finalMid = mid;
+                menuIdList.forEach(menuId -> {
+                    MenuDB menuDB1 = new MenuDB();
+                    menuDB1.setId(menuId);
+                    menuDB1 = menuDBMapper.selectOne(menuDB1);
+                    if (menuDB1.getParentId() == finalMid) {
+                        Menu menu1 = BeanCopyUtil.copy(menuDB1, Menu.class);
+                        Meta meta1 = new Meta();
+                        meta1.setKeepAlive(menuDB1.getKeepAlive());
+                        meta1.setRequireAuth(menuDB1.getRequireAuth());
+                        menu1.setMeta(meta1);
+                        childrenMenu.add(menu1);
+                    }
+                });
+                menu.setChildren(childrenMenu);
+                menus.add(menu);
+            }
+        }
+        return menus;
     }
 }
