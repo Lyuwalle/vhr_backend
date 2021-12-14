@@ -3,12 +3,15 @@ package com.lyuwalle.backend.Repo;
 import com.lyuwalle.backend.domain.Hr;
 import com.lyuwalle.backend.domain.Menu;
 import com.lyuwalle.backend.domain.Meta;
+import com.lyuwalle.backend.domain.Role;
 import com.lyuwalle.backend.mapper.HrRoleDBMapper;
 import com.lyuwalle.backend.mapper.MenuDBMapper;
 import com.lyuwalle.backend.mapper.MenuRoleDBMapper;
+import com.lyuwalle.backend.mapper.RoleDBMapper;
 import com.lyuwalle.backend.model.HrRoleDB;
 import com.lyuwalle.backend.model.MenuDB;
 import com.lyuwalle.backend.model.MenuRoleDB;
+import com.lyuwalle.backend.model.RoleDB;
 import com.lyuwalle.backend.utils.BeanCopyUtil;
 import com.lyuwalle.backend.utils.HrUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,8 @@ public class MenuRepo {
     private MenuRoleDBMapper menuRoleDBMapper;
     @Autowired
     private HrRoleDBMapper hrRoleDBMapper;
+    @Autowired
+    private RoleDBMapper roleDBMapper;
 
     private static final int startMid = 2;
     private static final int endMid = 6;
@@ -109,5 +114,30 @@ public class MenuRepo {
             }
         }
         return menus;
+    }
+
+    /**
+     * Menu增加了一個List<Role>属性, 查询出所有的menu（带List<Menu>属性）
+     * @return
+     */
+    public List<Menu> getAllMenusWithRole() {
+        List<MenuDB> menuDBList = menuDBMapper.selectAll();
+        return menuDBList.stream().map(menuDB -> {
+            Menu menu = BeanCopyUtil.copy(menuDB, Menu.class);
+
+            Integer mid = menuDB.getId();
+            MenuRoleDB menuRoleDB = new MenuRoleDB();
+            menuRoleDB.setMid(mid);
+            List<MenuRoleDB> menuRoleDBList = menuRoleDBMapper.select(menuRoleDB);
+            List<Role> roleList = menuRoleDBList.stream().map(menuRoleDBEach -> {
+                Integer rid = menuRoleDBEach.getRid();
+                RoleDB roleDB = new RoleDB();
+                roleDB.setId(rid);
+                RoleDB roleDB1 = roleDBMapper.selectOne(roleDB);
+                return BeanCopyUtil.copy(roleDB1, Role.class);
+            }).collect(Collectors.toList());
+            menu.setRoles(roleList);
+            return menu;
+        }).collect(Collectors.toList());
     }
 }

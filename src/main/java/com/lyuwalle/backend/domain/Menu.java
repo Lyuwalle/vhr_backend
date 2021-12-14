@@ -29,4 +29,9 @@ public class Menu {
      * 子菜单
      */
     private List<Menu> children;
+
+    /**
+     * 表示要访问这个菜单需要哪些角色
+     */
+    private List<Role> roles;
 }

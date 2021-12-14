@@ -35,6 +35,9 @@ public class Hr implements UserDetails {
 
     private String remark;
 
+    /**
+     * 用户的角色的初始化在HrService里面
+     */
     private List<Role> roles;
 
     @Override
@@ -54,15 +57,19 @@ public class Hr implements UserDetails {
         return Objects.hash(username);
     }
 
+    /**
+     * 返回这个用户的角色
+     *
+     * @return
+     */
     @Override
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        /*List<SimpleGrantedAuthority> authorities = new ArrayList<>(roles.size());
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>(roles.size());
         for(Role role : roles) {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
         }
-        return authorities;*/
-        return null;
+        return authorities;
     }
 
     @Override

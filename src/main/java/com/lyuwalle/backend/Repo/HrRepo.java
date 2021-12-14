@@ -1,13 +1,19 @@
 package com.lyuwalle.backend.Repo;
 
 import com.lyuwalle.backend.domain.Hr;
+import com.lyuwalle.backend.domain.Role;
 import com.lyuwalle.backend.mapper.HrDBMapper;
+import com.lyuwalle.backend.mapper.HrRoleDBMapper;
+import com.lyuwalle.backend.mapper.RoleDBMapper;
 import com.lyuwalle.backend.model.HrDB;
+import com.lyuwalle.backend.model.HrRoleDB;
+import com.lyuwalle.backend.model.RoleDB;
 import com.lyuwalle.backend.utils.BeanCopyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,6 +22,10 @@ public class HrRepo {
 
     @Autowired
     private HrDBMapper hrDBMapper;
+    @Autowired
+    private HrRoleDBMapper hrRoleDBMapper;
+    @Autowired
+    private RoleDBMapper roleDBMapper;
 
     public Hr loadUserByUsername(Hr hrInfo) {
         HrDB hrDB = new HrDB();
@@ -42,4 +52,18 @@ public class HrRepo {
         return hrDBMapper.delete(hrDB);
     }
 
+    public List<Role> getHrRolesById(Integer hrId) {
+        HrRoleDB hrRoleDB = new HrRoleDB();
+        hrRoleDB.setHrid(hrId);
+        List<HrRoleDB> hrRoleList = hrRoleDBMapper.select(hrRoleDB);
+        List<Role> roles = new ArrayList<>();
+        for (HrRoleDB hrRoleDB1 : hrRoleList) {
+            Integer rid = hrRoleDB1.getRid();
+            RoleDB roleDB = new RoleDB();
+            roleDB.setId(rid);
+            RoleDB roleDB1 = roleDBMapper.selectOne(roleDB);
+            roles.add(BeanCopyUtil.copy(roleDB1, Role.class));
+        }
+        return roles;
+    }
 }

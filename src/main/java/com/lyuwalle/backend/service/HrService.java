@@ -28,6 +28,8 @@ public class HrService implements UserDetailsService {
         if (hr == null) {
             throw new UsernameNotFoundException("用户名不存在!");
         }
+        //登录成功之后设置用户的角色
+        hr.setRoles(hrRepo.getHrRolesById(hr.getId()));
         return hr;
     }
 

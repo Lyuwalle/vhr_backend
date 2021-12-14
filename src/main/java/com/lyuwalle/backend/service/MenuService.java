@@ -35,4 +35,12 @@ public class MenuService {
     public List<Menu> getMenusByHrId() {
         return menuRepo.getMenusByHrId();
     }
+
+    /**
+     * @Cacheble 可以加这个注解，但是要配redis
+     * @return
+     */
+    public List<Menu> getAllMenusWithRole() {
+        return menuRepo.getAllMenusWithRole();
+    }
 }
