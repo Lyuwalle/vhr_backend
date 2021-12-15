@@ -27,9 +27,15 @@ public class CustomUrlDecisionManager implements AccessDecisionManager {
      * @throws InsufficientAuthenticationException
      */
     @Override
-    public void decide(Authentication authentication, Object o, Collection<ConfigAttribute> collection) throws AccessDeniedException, InsufficientAuthenticationException {
+    public void decide(Authentication authentication, Object o, Collection<ConfigAttribute> collection)
+            throws AccessDeniedException, InsufficientAuthenticationException {
         for (ConfigAttribute configAttribute : collection) {
             String needRole = configAttribute.getAttribute();
+            /**
+             * 前端页面已经做了限制，如果没有登录访问一个url，如果window.sessionStorage里面没有这个user，路由导航守卫会定向到登录页面
+             * 然后登录之后重定向到之前想要的访问地址
+             * 因此下面这个if不会执行，页面不会提示让用户登录。
+             */
             if ("ROLE_LOGIN".equals(needRole)) {
                 if (authentication instanceof AnonymousAuthenticationToken) {
                     throw new AccessDeniedException("尚未登录，请登录");

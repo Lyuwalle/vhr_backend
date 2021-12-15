@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lyuwalle.backend.common.RespBean;
 import com.lyuwalle.backend.domain.Hr;
 import com.lyuwalle.backend.service.HrService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,13 +14,20 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 @Configuration
+@Slf4j
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -93,6 +101,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     Hr principal = (Hr) authentication.getPrincipal();
                     principal.setPassword(null);
                     RespBean ok = RespBean.ok("登录成功！", principal);
+                    log.info("用户<{}>登录成功" , principal.getName());
                     //登录成功把用户对象返回出去
                     String s = new ObjectMapper().writeValueAsString(ok);
                     writer.write(s);
@@ -133,6 +142,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 })
                 .permitAll()
                 .and()
-                .csrf().disable();
+                .csrf().disable()
+                /*没有登录时，在这里处理结果，不需要重定向。那前面的.loginPage("/login")就不再需要
+                前端重定向的结果就是localhost:8080/login，而不经过nodejs*/
+                /*这是一个跨域的问题，解决办法就是直接提示重新登录*/
+
+                /*在路由导航守卫已经解决了没有登录直接访问的问题，那下面这个还需要吗？？？？？？？？？？？？？？？？？？*/
+                /*需要的。路由导航守卫解决的是window.sessionStorage里面没有user的缓存信息，则直接去登录页面*/
+                /*当后端重启时，前端尚有user缓存，不注销登录的前提下如果再去访问一个页面，就会提示下面的信息*/
+                .exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint() {
+                    @Override
+                    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
+                        response.setContentType("application/json;charset=utf-8");
+                        response.setStatus(401);
+                        PrintWriter out = response.getWriter();
+                        RespBean error = RespBean.error("^_^");
+                        if(e instanceof InsufficientAuthenticationException){
+                            /*那么下面这句话前端就看不到了，前端如果发现是401就会replace到登录页面，这句话只有在用postman测试时才会看到*/
+                            error.setMessage("权限不足，请注销后重新登录！InsufficientAuthenticationException");
+                        }
+                        out.write(new ObjectMapper().writeValueAsString(error));
+                        out.flush();
+                        out.close();
+                    }
+        });
     }
 }

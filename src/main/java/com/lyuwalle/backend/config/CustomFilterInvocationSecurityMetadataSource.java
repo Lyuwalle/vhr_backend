@@ -31,9 +31,11 @@ public class CustomFilterInvocationSecurityMetadataSource implements FilterInvoc
     AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     /**
-     * 我们可以从getAttributes(Object object)方法的参数object中提取出当前的请求url，然后将这个请求url和数据库中查询出来的所有
+     * 从getAttributes(Object object)方法的参数object中提取出当前的请求url，然后将这个请求url和数据库中查询出来的所有
      * url pattern一一对照，看符合哪一个url pattern，然后就获取到该url pattern所对应的角色，当然这个角色可能有多个，
      * 所以遍历角色，最后利用SecurityConfig.createList方法来创建一个角色集合。
+     * 表示这个url需要哪些角色才能访问
+     *
      * @param object
      * @return
      * @throws IllegalArgumentException
