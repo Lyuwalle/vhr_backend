@@ -16,7 +16,9 @@ import java.util.List;
 
 /**
  * @author: Lyuwalle  @date: 2021/12/08 23:34
- * 自定义权限拦截,
+ *
+ * 自定义权限拦截管理器
+ *
  * 这个类的作用，主要是根据用户传来的请求地址，分析出请求需要的角色,在getAttributes方法中返回的是一个角色数组。
  */
 @Component
@@ -31,9 +33,6 @@ public class CustomFilterInvocationSecurityMetadataSource implements FilterInvoc
     AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     /**
-     * 从getAttributes(Object object)方法的参数object中提取出当前的请求url，然后将这个请求url和数据库中查询出来的所有
-     * url pattern一一对照，看符合哪一个url pattern，然后就获取到该url pattern所对应的角色，当然这个角色可能有多个，
-     * 所以遍历角色，最后利用SecurityConfig.createList方法来创建一个角色集合。
      * 表示这个url需要哪些角色才能访问
      *
      * @param object
@@ -42,10 +41,9 @@ public class CustomFilterInvocationSecurityMetadataSource implements FilterInvoc
      */
     @Override
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
+
         String requestUrl = ((FilterInvocation) object).getRequestUrl();
-        /**
-         * getAllMenusWithRole表示一个一对多的查询，前面的列是Menu，后面的列是Role,一个Menu对应多个Role
-         */
+        //Menu类里面有一个List<Role>属性
         List<Menu> menus = menuService.getAllMenusWithRole();
         for (Menu menu : menus) {
             if (antPathMatcher.match(menu.getUrl(), requestUrl)) {

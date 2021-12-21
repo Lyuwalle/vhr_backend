@@ -5,6 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  * @author lyuxiyang
+ *
  * 得到当前登录的用户
  */
 public class HrUtil {

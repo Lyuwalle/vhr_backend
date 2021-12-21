@@ -26,6 +26,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * @author lyuxiyang
+ */
 @Configuration
 @Slf4j
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -33,8 +36,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private HrService hrService;
 
+    /**
+     * 自定义的权限拦截管理器
+     */
     @Autowired
     private CustomFilterInvocationSecurityMetadataSource customFilterInvocationSecurityMetadataSource;
+    /**
+     * 自定义的决策管理器
+     */
     @Autowired
     private CustomUrlDecisionManager customUrlDecisionManager;
 
@@ -63,7 +72,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/img/**",
                 "/fonts/**",
                 "/favicon.ico",
-                "/verifyCode");
+                "/verifyCode",
+                "/login"
+                );
     }
 
     /**
@@ -71,6 +82,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      *
      * @param http
      * @throws Exception
+     *
+     * 登录页面：/login
+     * 登录处理页面（后端登录接口）：/doLogin
      * 注销url：/logout
      * permitAll() ： 不认证权限就允许访问
      * and() ： 将方法连接在一起
@@ -143,28 +157,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .csrf().disable()
-                /*没有登录时，在这里处理结果，不需要重定向。那前面的.loginPage("/login")就不再需要
+                /*没有登录时，在这里处理结果，不需要重定向。那前面的.loginPage("/login")就不再需要，LoginController里面的 /login 也不需要
                 前端重定向的结果就是localhost:8080/login，而不经过nodejs*/
                 /*这是一个跨域的问题，解决办法就是直接提示重新登录*/
 
-                /*在路由导航守卫已经解决了没有登录直接访问的问题，那下面这个还需要吗？？？？？？？？？？？？？？？？？？*/
+                /*在路由导航守卫已经解决了没有登录直接访问的问题，那下面这个还需要吗(postman直接访问的时候会显示下面的msg)*/
                 /*需要的。路由导航守卫解决的是window.sessionStorage里面没有user的缓存信息，则直接去登录页面*/
                 /*当后端重启时，前端尚有user缓存，不注销登录的前提下如果再去访问一个页面，就会提示下面的信息*/
-                .exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint() {
-                    @Override
-                    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
-                        response.setContentType("application/json;charset=utf-8");
-                        response.setStatus(401);
-                        PrintWriter out = response.getWriter();
-                        RespBean error = RespBean.error("^_^");
-                        if(e instanceof InsufficientAuthenticationException){
-                            /*那么下面这句话前端就看不到了，前端如果发现是401就会replace到登录页面，这句话只有在用postman测试时才会看到*/
-                            error.setMessage("权限不足，请注销后重新登录！InsufficientAuthenticationException");
-                        }
-                        out.write(new ObjectMapper().writeValueAsString(error));
-                        out.flush();
-                        out.close();
+                .exceptionHandling().authenticationEntryPoint((request, response, e) -> {
+                    response.setContentType("application/json;charset=utf-8");
+                    response.setStatus(401);
+                    PrintWriter out = response.getWriter();
+                    RespBean error = RespBean.error("^_^");
+                    if(e instanceof InsufficientAuthenticationException){
+                        /*那么下面这句话前端就看不到了，前端如果发现是401就会replace到登录页面，这句话只有在用postman测试时才会看到*/
+                        error.setMessage("权限不足，请登录后访问");
                     }
-        });
+                    out.write(new ObjectMapper().writeValueAsString(error));
+                    out.flush();
+                    out.close();
+                });
     }
 }

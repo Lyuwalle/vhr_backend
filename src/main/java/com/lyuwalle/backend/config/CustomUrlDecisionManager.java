@@ -13,6 +13,8 @@ import java.util.Collection;
 
 /**
  * @author: Lyuwalle  @date: 2021/12/14 00:02
+ *
+ * 访问决策管理器
  */
 @Component
 public class CustomUrlDecisionManager implements AccessDecisionManager {
@@ -20,9 +22,9 @@ public class CustomUrlDecisionManager implements AccessDecisionManager {
      * 判断当前用户是否具备CustomFilterInvocationSecurityMetadataSource分析出来的角色
      * 判断当前请求具有的权限和当前请求需要的权限的关系。
      *
-     * @param authentication
+     * @param authentication    表示登录的用户具有的authentication
      * @param o
-     * @param collection
+     * @param collection        表示这个用户访问的地址需要的角色集合，即FilterInvocationSecurityMetadataSource的getAttribute的返回集合
      * @throws AccessDeniedException
      * @throws InsufficientAuthenticationException
      */
@@ -53,6 +55,12 @@ public class CustomUrlDecisionManager implements AccessDecisionManager {
         throw new AccessDeniedException("权限不足！");
     }
 
+    /**
+     * 表示支持对FilterInvocationSecurityMetadataSource的getAttribute方法获得的角色
+     *
+     * @param configAttribute
+     * @return
+     */
     @Override
     public boolean supports(ConfigAttribute configAttribute) {
         return true;
