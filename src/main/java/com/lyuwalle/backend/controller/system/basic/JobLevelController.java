@@ -52,6 +52,6 @@ public class JobLevelController {
         if (jobLevelService.deleteJobLevelByIds(ids) == ids.length) {
             return RespBean.ok("批量删除职位成功");
         }
-        return RespBean.error("批量删除职位失败,该职位下可能上有员工");
+        return RespBean.error("批量删除职位失败,该职位下可能尚有员工数据关联");
     }
 }

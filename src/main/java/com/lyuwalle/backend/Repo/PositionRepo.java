@@ -22,8 +22,10 @@ public class PositionRepo {
 
 
     public List<Position> getAllPositions() {
-        return positionDBMapper.selectAll().stream().map(positionDB ->
-                BeanCopyUtil.copy(positionDB, Position.class)).collect(Collectors.toList());
+        return positionDBMapper.selectAll().stream().map(positionDB -> {
+            Position position = BeanCopyUtil.copy(positionDB, Position.class);
+            return position;
+        }).collect(Collectors.toList());
     }
 
     public int addPosition(Position position) {
@@ -31,7 +33,7 @@ public class PositionRepo {
     }
 
     public int updatePosition(Position position) {
-        return positionDBMapper.updateByPrimaryKey(BeanCopyUtil.copy(position, PositionDB.class));
+        return positionDBMapper.updateByPrimaryKeySelective(BeanCopyUtil.copy(position, PositionDB.class));
     }
 
     public int deletePositionById(Integer id) {

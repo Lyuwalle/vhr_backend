@@ -30,7 +30,7 @@ public class JobLevelRepo {
     }
 
     public int updateJobLevel(JobLevel jobLevel) {
-        return jobLevelDbMapper.updateByPrimaryKey(BeanCopyUtil.copy(jobLevel, JobLevelDB.class));
+        return jobLevelDbMapper.updateByPrimaryKeySelective(BeanCopyUtil.copy(jobLevel, JobLevelDB.class));
     }
 
     public int deleteJobLevelById(Integer id) {

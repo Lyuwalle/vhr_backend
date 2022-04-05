@@ -5,6 +5,7 @@ import com.lyuwalle.backend.domain.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,6 +22,8 @@ public class PositionService {
     }
 
     public int addPosition(Position position) {
+        position.setEnabled(true);
+        position.setCreateDate(new Date());
         return positionRepo.addPosition(position);
     }
 
