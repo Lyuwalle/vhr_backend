@@ -10,6 +10,7 @@ import com.lyuwalle.backend.utils.BeanCopyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +27,7 @@ public class JobLevelRepo {
     }
 
     public int addJobLevel(JobLevel jobLevel) {
+        jobLevel.setCreateDate(new Date());
         return jobLevelDbMapper.insert(BeanCopyUtil.copy(jobLevel, JobLevelDB.class));
     }
 
