@@ -36,7 +36,7 @@
   </resultMap>
 
   <select id="getMaxEmpId" resultType="java.lang.Integer">
-    select max(workID)
+    select max(work_id)
     from employee
   </select>
 

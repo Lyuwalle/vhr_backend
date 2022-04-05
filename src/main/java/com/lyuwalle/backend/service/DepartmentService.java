@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author lyuxiyang
@@ -17,6 +18,13 @@ public class DepartmentService {
     private DepartmentRepo departmentRepo;
 
     public List<Department> getAllDepartments() {
-        return departmentRepo.getAllDepartments();
+        List<Department> allDepartments = departmentRepo.getAllDepartments();
+        return allDepartments.stream().map(department -> {
+            if(department.getIsParent()) {
+                List<Department> childrenDepartments = departmentRepo.getChildDepartmentsById(department.getId());
+                department.setChildren(childrenDepartments);
+            }
+            return department;
+        }).collect(Collectors.toList());
     }
 }

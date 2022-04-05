@@ -1,5 +1,6 @@
 package com.lyuwalle.backend.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
@@ -22,6 +23,7 @@ public class Employee {
     /**
      * 出生日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Shanghai")
     private Date birthday;
 
     /**
@@ -102,6 +104,7 @@ public class Employee {
     /**
      * 入职日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Shanghai")
     private Date beginDate;
 
     /**
@@ -122,21 +125,25 @@ public class Employee {
     /**
      * 转正日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Shanghai")
     private Date conversionTime;
 
     /**
      * 离职日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Shanghai")
     private Date notWorkDate;
 
     /**
      * 合同起始日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Shanghai")
     private Date beginContract;
 
     /**
      * 合同终止日期
      */
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Shanghai")
     private Date endContract;
 
     /**

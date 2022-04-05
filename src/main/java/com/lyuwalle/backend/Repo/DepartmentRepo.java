@@ -20,4 +20,10 @@ public class DepartmentRepo {
         List<DepartmentDB> departmentDbList = departmentDBMapper.selectAll();
         return departmentDbList.stream().map(departmentDB -> BeanCopyUtil.copy(departmentDB, Department.class)).collect(Collectors.toList());
     }
+
+    public List<Department> getChildDepartmentsById(Integer id) {
+        DepartmentDB departmentDB = new DepartmentDB();
+        departmentDB.setParentId(id);
+        return departmentDBMapper.select(departmentDB).stream().map(departmentDB1 -> BeanCopyUtil.copy(departmentDB1, Department.class)).collect(Collectors.toList());
+    }
 }
