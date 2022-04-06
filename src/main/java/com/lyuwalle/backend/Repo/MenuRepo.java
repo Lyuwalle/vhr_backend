@@ -140,4 +140,17 @@ public class MenuRepo {
             return menu;
         }).collect(Collectors.toList());
     }
+
+    public Menu getRootMenu(Menu root) {
+        MenuDB menuDB = BeanCopyUtil.copy(root, MenuDB.class);
+        MenuDB rootDB = menuDBMapper.selectOne(menuDB);
+        return BeanCopyUtil.copy(rootDB, Menu.class);
+    }
+
+    public List<Menu> getMenusByParentId(Integer parentId) {
+        MenuDB menuDB = new MenuDB();
+        menuDB.setParentId(parentId);
+        return menuDBMapper.select(menuDB).stream().map(menuDB1 ->
+                BeanCopyUtil.copy(menuDB1, Menu.class)).collect(Collectors.toList());
+    }
 }

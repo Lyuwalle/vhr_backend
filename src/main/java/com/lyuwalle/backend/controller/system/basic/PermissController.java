@@ -27,6 +27,19 @@ public class PermissController {
         return roleService.getAllRoles();
     }
 
+    /**
+     * 查询所有菜单：
+     * 菜单一共有三级：
+     *              所有
+     *                  员工资料
+     *                      基本资料
+     *                      高级资料
+     *                  人事管理
+     *                      员工资料
+     *                      员工奖惩
+     *                      。。。
+     * @return
+     */
     @GetMapping("/menus")
     public List<Menu> getAllMenus() {
         return menuService.getAllMenus();
