@@ -57,7 +57,7 @@ public class PermissController {
     }
 
     /**
-     * 更新角色id所对应的菜单mids
+     * 更新角色id所对应的菜单mids，mids是这个rid对应的所有的角色，是更新，不是添加
      *
      * @param rid
      * @param mids
