@@ -42,4 +42,12 @@ public class DepartmentService {
         }
         return departmentList;
     }
+
+    public Integer addDepartment(Department department) {
+        return departmentRepo.addDepartment(department.getParentId(), department.getName());
+    }
+
+    public Integer deleteDepartmentById(Integer id) {
+        return departmentRepo.deleteDepartmentById(id);
+    }
 }

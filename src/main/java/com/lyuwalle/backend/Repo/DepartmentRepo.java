@@ -39,4 +39,28 @@ public class DepartmentRepo {
         return departmentDBMapper.select(departmentDB).stream().map(departmentDB1 ->
                 BeanCopyUtil.copy(departmentDB1, Department.class)).collect(Collectors.toList());
     }
+
+    public Integer addDepartment(Integer parentId, String name) {
+        DepartmentDB parentDepartment = new DepartmentDB();
+        parentDepartment.setId(parentId);
+        parentDepartment = departmentDBMapper.selectByPrimaryKey(parentDepartment);
+
+        DepartmentDB departmentDB = new DepartmentDB();
+        departmentDB.setParentId(parentId);
+        departmentDB.setName(name);
+        departmentDB.setEnabled(true);
+        departmentDB.setIsParent(false);
+        Integer maxId = departmentDBMapper.selectMaxId();
+        departmentDB.setDepPath(new StringBuilder(parentDepartment.getDepPath()).
+                append(".").append(maxId + 1).toString());
+
+        return departmentDBMapper.insert(departmentDB);
+    }
+
+    public Integer deleteDepartmentById(Integer id) {
+        DepartmentDB departmentDB = new DepartmentDB();
+        departmentDB.setId(id);
+        departmentDB.setEnabled(false);
+        return departmentDBMapper.updateByPrimaryKeySelective(departmentDB);
+    }
 }
