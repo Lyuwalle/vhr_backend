@@ -71,6 +71,11 @@ public class PermissController {
         return RespBean.error("更新角色失败");
     }
 
+    /**
+     * 权限组添加角色
+     * @param role
+     * @return
+     */
     @PostMapping("/role")
     public RespBean addRole(@RequestBody Role role) {
         if (roleService.addRole(role) == 1) {
@@ -79,6 +84,11 @@ public class PermissController {
         return RespBean.error("添加角色失败");
     }
 
+    /**
+     * 权限组删除角色
+     * @param rid
+     * @return
+     */
     @DeleteMapping("/role/{rid}")
     public RespBean deleteRoleById(@PathVariable Integer rid) {
         if (roleService.deleteRoleById(rid) == 1) {

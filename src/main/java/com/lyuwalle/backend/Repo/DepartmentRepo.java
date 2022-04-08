@@ -26,4 +26,17 @@ public class DepartmentRepo {
         departmentDB.setParentId(id);
         return departmentDBMapper.select(departmentDB).stream().map(departmentDB1 -> BeanCopyUtil.copy(departmentDB1, Department.class)).collect(Collectors.toList());
     }
+
+    /**
+     * 根据parentId查询出所有的部门
+     * @param parentId
+     * @return
+     */
+    public List<Department> getDepartmentsByParentId(Integer parentId) {
+        DepartmentDB departmentDB = new DepartmentDB();
+        departmentDB.setEnabled(true);
+        departmentDB.setParentId(parentId);
+        return departmentDBMapper.select(departmentDB).stream().map(departmentDB1 ->
+                BeanCopyUtil.copy(departmentDB1, Department.class)).collect(Collectors.toList());
+    }
 }

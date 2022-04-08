@@ -5,6 +5,7 @@ import com.lyuwalle.backend.domain.Department;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,13 +19,27 @@ public class DepartmentService {
     private DepartmentRepo departmentRepo;
 
     public List<Department> getAllDepartments() {
-        List<Department> allDepartments = departmentRepo.getAllDepartments();
-        return allDepartments.stream().map(department -> {
-            if(department.getIsParent()) {
-                List<Department> childrenDepartments = departmentRepo.getChildDepartmentsById(department.getId());
-                department.setChildren(childrenDepartments);
+        Department rootDepartment = new Department();
+        rootDepartment.setParentId(-1);
+        List<Department> departmentList = departmentRepo.getDepartmentsByParentId(rootDepartment.getParentId());
+        for (Department department : departmentList) {
+            //一个队列
+            LinkedList<Department> departmentLinkedList = new LinkedList<>();
+            departmentLinkedList.add(department);
+            while (!departmentLinkedList.isEmpty()) {
+                if (!departmentLinkedList.peek().getIsParent()) {
+                    departmentLinkedList.pop();
+                    continue;
+                }
+                Integer parentId = departmentLinkedList.peek().getId();
+                List<Department> childrenDepartmentList = departmentRepo.getDepartmentsByParentId(parentId);
+                for (Department department1 : childrenDepartmentList) {
+                    departmentLinkedList.add(department1);
+                }
+                departmentLinkedList.peek().setChildren(childrenDepartmentList);
+                departmentLinkedList.pop();
             }
-            return department;
-        }).collect(Collectors.toList());
+        }
+        return departmentList;
     }
 }

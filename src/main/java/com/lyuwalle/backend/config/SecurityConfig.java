@@ -166,6 +166,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 /*当后端重启时，前端尚有user缓存，不注销登录的前提下如果再去访问一个页面，就会提示下面的信息*/
                 .exceptionHandling().authenticationEntryPoint((request, response, e) -> {
                     response.setContentType("application/json;charset=utf-8");
+                    /*返回给前端401，前端做自动登录跳转*/
                     response.setStatus(401);
                     PrintWriter out = response.getWriter();
                     RespBean error = RespBean.error("^_^");
