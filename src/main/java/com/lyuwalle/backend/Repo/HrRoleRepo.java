@@ -1,10 +1,15 @@
 package com.lyuwalle.backend.Repo;
 
 import com.lyuwalle.backend.common.BaseException;
+import com.lyuwalle.backend.domain.HrRole;
 import com.lyuwalle.backend.mapper.HrRoleDBMapper;
 import com.lyuwalle.backend.model.HrRoleDB;
+import com.lyuwalle.backend.utils.BeanCopyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class HrRoleRepo {
@@ -39,5 +44,12 @@ public class HrRoleRepo {
             }
         }
         return true;
+    }
+
+    public List<HrRole> getHrRoleListByHrId(Integer hrId) {
+        HrRoleDB hrRoleDB = new HrRoleDB();
+        hrRoleDB.setHrid(hrId);
+        return hrRoleDBMapper.select(hrRoleDB).stream().map(hrRoleDB1 ->
+                BeanCopyUtil.copy(hrRoleDB1, HrRole.class)).collect(Collectors.toList());
     }
 }

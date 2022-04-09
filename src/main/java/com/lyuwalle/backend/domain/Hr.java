@@ -29,6 +29,7 @@ public class Hr implements UserDetails {
 
     private String username;
 
+    @JsonIgnore
     private String password;
 
     private String userface;
@@ -72,10 +73,10 @@ public class Hr implements UserDetails {
         return authorities;
     }
 
-    @Override
+/*    @Override
     public String getPassword() {
         return this.password;
-    }
+    }*/
 
     @Override
     public String getUsername() {

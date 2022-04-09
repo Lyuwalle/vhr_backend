@@ -60,7 +60,7 @@ public class DepartmentRepo {
     public Integer deleteDepartmentById(Integer id) {
         DepartmentDB departmentDB = new DepartmentDB();
         departmentDB.setId(id);
-        departmentDB.setEnabled(false);
-        return departmentDBMapper.updateByPrimaryKeySelective(departmentDB);
+        //departmentDB.setEnabled(false);
+        return departmentDBMapper.deleteByPrimaryKey(departmentDB);
     }
 }

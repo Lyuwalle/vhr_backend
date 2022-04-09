@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/system/hr")
 public class HrController {
 
@@ -20,6 +20,11 @@ public class HrController {
     @Autowired
     RoleService roleService;
 
+    /**
+     * 获取所有用户信息（除了当前登录的用户）
+     * @param keywords
+     * @return
+     */
     @GetMapping("/")
     public List<Hr> getAllHrs(String keywords) {
         return hrService.getAllHrs(keywords);

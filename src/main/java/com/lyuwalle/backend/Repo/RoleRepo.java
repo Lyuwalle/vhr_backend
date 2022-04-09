@@ -8,6 +8,7 @@ import com.lyuwalle.backend.model.RoleDB;
 import com.lyuwalle.backend.utils.BeanCopyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,5 +41,13 @@ public class RoleRepo {
         RoleDB roleDB = new RoleDB();
         roleDB.setId(rid);
         return roleDBMapper.delete(roleDB);
+    }
+
+    public List<Role> getRoleListByIds(List<Integer> roleIdList) {
+        Example example = new Example(RoleDB.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andIn("id", roleIdList);
+        return roleDBMapper.selectByExample(example).stream().map(roleDB ->
+                BeanCopyUtil.copy(roleDB, Role.class)).collect(Collectors.toList());
     }
 }

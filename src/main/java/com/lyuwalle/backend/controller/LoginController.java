@@ -11,6 +11,9 @@ import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+/**
+ * @author lyuxiyang
+ */
 @RestController
 public class LoginController {
 

@@ -9,6 +9,7 @@ import com.lyuwalle.backend.model.HrDB;
 import com.lyuwalle.backend.model.HrRoleDB;
 import com.lyuwalle.backend.model.RoleDB;
 import com.lyuwalle.backend.utils.BeanCopyUtil;
+import com.lyuwalle.backend.utils.HrUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -34,11 +35,15 @@ public class HrRepo {
     }
 
     public List<Hr> getAllHrs(String keywords) {
+        //获得当前登录的hr，作为过滤
+        Integer currentHrId = HrUtil.getCurrentHr().getId();
+
         Example example = new Example(HrDB.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andLike("name", keywords);
         List<HrDB> hrDBS = hrDBMapper.selectByExample(example);
-        return hrDBS.stream().map(hrDB -> BeanCopyUtil.copy(hrDB, Hr.class)).collect(Collectors.toList());
+        return hrDBS.stream().filter(hrDB -> !hrDB.getId().equals(currentHrId))
+                .map(hrDB -> BeanCopyUtil.copy(hrDB, Hr.class)).collect(Collectors.toList());
     }
 
     public int updateHr(Hr hr) {
