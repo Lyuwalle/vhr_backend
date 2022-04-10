@@ -41,11 +41,13 @@ public class HrService implements UserDetailsService {
     public List<Hr> getAllHrs(String keywords) {
         List<Hr> allHrs = hrRepo.getAllHrs(keywords);
         allHrs.forEach(hr -> {
-            Integer hrId = hr.getId();
-            List<HrRole> hrRoleList = hrRoleRepo.getHrRoleListByHrId(hrId);
-            List<Integer> roleIdList = hrRoleList.stream().map(hrRole -> hrRole.getRid()).collect(Collectors.toList());
-            List<Role> roleList = roleRepo.getRoleListByIds(roleIdList);
-            hr.setRoles(roleList);
+            if (hr.isEnabled()) {
+                Integer hrId = hr.getId();
+                List<HrRole> hrRoleList = hrRoleRepo.getHrRoleListByHrId(hrId);
+                List<Integer> roleIdList = hrRoleList.stream().map(hrRole -> hrRole.getRid()).collect(Collectors.toList());
+                List<Role> roleList = roleRepo.getRoleListByIds(roleIdList);
+                hr.setRoles(roleList);
+            }
         });
         return allHrs;
     }

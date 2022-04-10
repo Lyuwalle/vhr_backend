@@ -6,6 +6,7 @@ import com.lyuwalle.backend.mapper.RoleDBMapper;
 import com.lyuwalle.backend.model.MenuRoleDB;
 import com.lyuwalle.backend.model.RoleDB;
 import com.lyuwalle.backend.utils.BeanCopyUtil;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -44,6 +45,9 @@ public class RoleRepo {
     }
 
     public List<Role> getRoleListByIds(List<Integer> roleIdList) {
+        if (CollectionUtils.isEmpty(roleIdList)) {
+            return null;
+        }
         Example example = new Example(RoleDB.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andIn("id", roleIdList);

@@ -1,5 +1,6 @@
 package com.lyuwalle.backend.common;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -9,6 +10,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
 /**
  * @author: Lyuwalle  @date: 2022/04/05 19:48
  */
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     /**
@@ -21,6 +23,7 @@ public class GlobalExceptionHandler {
         if (e instanceof SQLIntegrityConstraintViolationException) {
             return RespBean.error("该数据有关联数据，操作失败!");
         }
+        log.info(e.getMessage());
         return RespBean.error("数据库异常，操作失败！");
     }
 }

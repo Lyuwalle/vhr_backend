@@ -36,9 +36,11 @@ public class HrRoleRepo {
         //2. 给hrid添加rids角色
         hrRoleDB.setHrid(hrid);
         for (Integer rid : rids) {
+            //同一个hrRoleDB，循环第二次开始的时候id会存在，再插入可能会造成主键冲突
+            hrRoleDB.setId(null);
             hrRoleDB.setRid(rid);
             try {
-                hrRoleDBMapper.insert(hrRoleDB);
+                hrRoleDBMapper.insertSelective(hrRoleDB);
             } catch (Exception e) {
                 BaseException.cast("插入失败" + e.getMessage());
             }

@@ -40,7 +40,9 @@ public class HrRepo {
 
         Example example = new Example(HrDB.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andLike("name", keywords);
+        if (!keywords.equals("") && keywords != null) {
+            criteria.andLike("name", "%" + keywords + "%");
+        }
         List<HrDB> hrDBS = hrDBMapper.selectByExample(example);
         return hrDBS.stream().filter(hrDB -> !hrDB.getId().equals(currentHrId))
                 .map(hrDB -> BeanCopyUtil.copy(hrDB, Hr.class)).collect(Collectors.toList());

@@ -5,12 +5,14 @@ import com.lyuwalle.backend.domain.Hr;
 import com.lyuwalle.backend.domain.Role;
 import com.lyuwalle.backend.service.HrService;
 import com.lyuwalle.backend.service.RoleService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/system/hr")
 public class HrController {
@@ -33,9 +35,10 @@ public class HrController {
     @PutMapping("/")
     public RespBean updateHr(@RequestBody Hr hr) {
         if (hrService.updateHr(hr) == 1) {
-            return RespBean.ok("更新用户成功");
+            log.info("用户<{}>信息更新成功", hr.getName());
+            return RespBean.ok("更新用户状态成功");
         }
-        return RespBean.error("更新用户失败");
+        return RespBean.error("更新用户状态失败");
     }
 
     @DeleteMapping("/{id}")
@@ -53,6 +56,7 @@ public class HrController {
 
     @PutMapping("/role")
     public RespBean updateHrRole (Integer hrid, Integer[] rids) {
+        log.info("hrid={}, rids={} 更新用户角色", hrid, rids);
         if (hrService.updateHrRole(hrid, rids)) {
             return RespBean.ok("更新用户角色成功");
         }
