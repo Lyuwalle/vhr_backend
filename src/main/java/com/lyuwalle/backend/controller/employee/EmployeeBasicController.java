@@ -52,12 +52,14 @@ public class EmployeeBasicController {
      *
      * @param page
      * @param pageSize
+     * @param keyword 根据员工姓名检索
      * @return
      */
     @GetMapping("/allEmp")
     public ListResult<Employee> getAllEmployeeByPage(@RequestParam(defaultValue = "1") Integer page,
-                                                     @RequestParam(defaultValue = "10") Integer pageSize) {
-        return employeeService.getAllEmployeeByPage(page, pageSize);
+                                                     @RequestParam(defaultValue = "10") Integer pageSize,
+                                                     String keyword) {
+        return employeeService.getAllEmployeeByPage(page, pageSize, keyword);
     }
 
     /**
@@ -83,9 +85,9 @@ public class EmployeeBasicController {
     @PutMapping("/")
     public RespBean updateEmployee(@RequestBody Employee employee) {
         if (employeeService.updateEmployee(employee) == 1) {
-            return RespBean.ok("添加成功！");
+            return RespBean.ok("更新成功！");
         }
-        return RespBean.error("添加失败！");
+        return RespBean.error("更新失败！");
     }
 
     @DeleteMapping("/{id}")
@@ -97,8 +99,8 @@ public class EmployeeBasicController {
     }
 
     @GetMapping("/maxEmpId")
-    public RespBean getMaxEmpId() {
-        return RespBean.build().setStatus(200).setObject(String.format("%08d", employeeService.getMaxEmpId() + 1));
+    public String getMaxEmpId() {
+        return String.format("%08d", employeeService.getMaxEmpId() + 1);
     }
 
     @GetMapping("/nations")

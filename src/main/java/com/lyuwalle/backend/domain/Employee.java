@@ -150,4 +150,11 @@ public class Employee {
      * 工龄
      */
     private Integer workAge;
+
+    private Nation nation;
+    private PoliticsStatus politicsStatus;
+    private Department department;
+    private JobLevel jobLevel;
+    private Position position;
+    private Salary salary;
 }

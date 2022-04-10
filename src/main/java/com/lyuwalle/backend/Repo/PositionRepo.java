@@ -65,4 +65,10 @@ public class PositionRepo {
         }
         return result;
     }
+
+    public Position getPositionById(Integer posId) {
+        PositionDB positionDB = new PositionDB();
+        positionDB.setId(posId);
+        return BeanCopyUtil.copy(positionDBMapper.selectByPrimaryKey(positionDB), Position.class);
+    }
 }

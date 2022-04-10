@@ -50,9 +50,10 @@ public class DepartmentRepo {
         departmentDB.setName(name);
         departmentDB.setEnabled(true);
         departmentDB.setIsParent(false);
+        /*department数据库中的DepPath没有被用到，注释掉
         Integer maxId = departmentDBMapper.selectMaxId();
         departmentDB.setDepPath(new StringBuilder(parentDepartment.getDepPath()).
-                append(".").append(maxId + 1).toString());
+                append(".").append(maxId + 1).toString());*/
 
         return departmentDBMapper.insert(departmentDB);
     }
@@ -62,5 +63,11 @@ public class DepartmentRepo {
         departmentDB.setId(id);
         //departmentDB.setEnabled(false);
         return departmentDBMapper.deleteByPrimaryKey(departmentDB);
+    }
+
+    public Department getDepartmentById(Integer departmentId) {
+        DepartmentDB departmentDB = new DepartmentDB();
+        departmentDB.setId(departmentId);
+        return BeanCopyUtil.copy(departmentDBMapper.selectByPrimaryKey(departmentDB), Department.class);
     }
 }

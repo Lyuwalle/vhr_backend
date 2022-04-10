@@ -53,9 +53,14 @@ public class EmployeeRepo {
         return new ListResult<>(employeeDbList.getTotal(), employeeList);
     }
 
-    public ListResult<Employee> getAllEmployeeByPage(Integer page, Integer pageSize) {
+    public ListResult<Employee> getAllEmployeeByPage(Integer page, Integer pageSize, String keyword) {
         Page<EmployeeDB> employeeDbList = PageHelper.startPage(page, pageSize).doSelectPage(() -> {
-            employeeDBMapper.selectAll();
+            Example example = new Example(EmployeeDB.class);
+            Example.Criteria criteria = example.createCriteria();
+            if (keyword != null && !keyword.equals("")) {
+                criteria.andLike("name", "%" + keyword + "%");
+            }
+            employeeDBMapper.selectByExample(example);
         });
         List<Employee> employeeList = employeeDbList.stream().map(employeeDB -> BeanCopyUtil.copy(employeeDB, Employee.class)).collect(Collectors.toList());
         return new ListResult<>(employeeDbList.getTotal(), employeeList);
@@ -74,7 +79,7 @@ public class EmployeeRepo {
     public int deleteEmpById(Integer id) {
         EmployeeDB employeeDB = new EmployeeDB();
         employeeDB.setId(id);
-        return employeeDBMapper.delete(employeeDB);
+        return employeeDBMapper.deleteByPrimaryKey(employeeDB);
     }
 
     public int getMaxEmpId() {

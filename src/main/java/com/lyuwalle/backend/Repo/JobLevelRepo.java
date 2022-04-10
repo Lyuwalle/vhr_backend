@@ -64,4 +64,10 @@ public class JobLevelRepo {
         }
         return result;
     }
+
+    public JobLevel getJobLevelById(Integer jobLevelId) {
+        JobLevelDB jobLevelDB = new JobLevelDB();
+        jobLevelDB.setId(jobLevelId);
+        return BeanCopyUtil.copy(jobLevelDbMapper.selectByPrimaryKey(jobLevelDB), JobLevel.class);
+    }
 }
