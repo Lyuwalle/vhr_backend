@@ -7,8 +7,12 @@ import com.lyuwalle.backend.domain.PoliticsStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author lyuxiyang
@@ -35,16 +39,21 @@ public class EmployeeService {
         return employeeRepo.getEmployeeByPage(page, pageSize, employee, dateScope);
     }
 
-    public ListResult<Employee> getAllEmployeeByPage(Integer page, Integer pageSize, String keyword) {
+    public ListResult<Employee> getAllEmployeeByPage(Integer page, Integer pageSize, Employee employee, String[] beginDateScope) throws ParseException {
+        Date[] dateScope = null;
+        if (Objects.nonNull(beginDateScope)) {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            dateScope = new Date[]{dateFormat.parse(beginDateScope[0]), dateFormat.parse(beginDateScope[1])};
+        }
         //设置民族，政治面貌，职位等信息
-        ListResult<Employee> employeeListResult = employeeRepo.getAllEmployeeByPage(page, pageSize, keyword);
+        ListResult<Employee> employeeListResult = employeeRepo.getAllEmployeeByPage(page, pageSize, employee, dateScope);
         List<Employee> employeeList = employeeListResult.getRecords();
-        employeeList.forEach(employee -> {
-            employee.setNation(nationRepo.getNationById(employee.getNationId()));
-            employee.setPoliticsStatus(politicsStatusRepo.getPoliticStatusById(employee.getPoliticId()));
-            employee.setDepartment(departmentRepo.getDepartmentById(employee.getDepartmentId()));
-            employee.setJobLevel(jobLevelRepo.getJobLevelById(employee.getJobLevelId()));
-            employee.setPosition(positionRepo.getPositionById(employee.getPosId()));
+        employeeList.forEach(employeeEach -> {
+            employeeEach.setNation(nationRepo.getNationById(employeeEach.getNationId()));
+            employeeEach.setPoliticsStatus(politicsStatusRepo.getPoliticStatusById(employeeEach.getPoliticId()));
+            employeeEach.setDepartment(departmentRepo.getDepartmentById(employeeEach.getDepartmentId()));
+            employeeEach.setJobLevel(jobLevelRepo.getJobLevelById(employeeEach.getJobLevelId()));
+            employeeEach.setPosition(positionRepo.getPositionById(employeeEach.getPosId()));
             //employee.setSalary(salaryRepo.);
         });
         employeeListResult.setRecords(employeeList);

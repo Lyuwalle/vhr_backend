@@ -4,9 +4,11 @@ import com.lyuwalle.backend.common.ListResult;
 import com.lyuwalle.backend.common.RespBean;
 import com.lyuwalle.backend.domain.*;
 import com.lyuwalle.backend.service.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +16,7 @@ import java.util.List;
  * @author lyuxiyang
  * @TODO 上传下载
  */
+@Slf4j
 @RestController
 @RequestMapping("/employee/basic")
 public class EmployeeBasicController {
@@ -32,7 +35,7 @@ public class EmployeeBasicController {
     private DepartmentService departmentService;
 
     /**
-     * 查询所有员工资料
+     *
      *
      * @param page
      * @param pageSize
@@ -48,18 +51,19 @@ public class EmployeeBasicController {
     }
 
     /**
-     * 分页查看所有员工的资料
-     *
+     * 查询所有员工资料
      * @param page
      * @param pageSize
-     * @param keyword 根据员工姓名检索
+     * @param employee 根据员工姓名进行搜索放在了employee的name属性里面
+     * @param beginDateScope 入职日期的范围
      * @return
      */
     @GetMapping("/allEmp")
     public ListResult<Employee> getAllEmployeeByPage(@RequestParam(defaultValue = "1") Integer page,
                                                      @RequestParam(defaultValue = "10") Integer pageSize,
-                                                     String keyword) {
-        return employeeService.getAllEmployeeByPage(page, pageSize, keyword);
+                                                     Employee employee, String[] beginDateScope) throws ParseException {
+        log.info("分页查询员工信息，查询条件: employee = {}, {}", employee, beginDateScope);
+        return employeeService.getAllEmployeeByPage(page, pageSize, employee, beginDateScope);
     }
 
     /**

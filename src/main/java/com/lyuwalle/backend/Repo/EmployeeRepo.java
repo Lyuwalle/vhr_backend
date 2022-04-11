@@ -13,6 +13,7 @@ import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -53,12 +54,24 @@ public class EmployeeRepo {
         return new ListResult<>(employeeDbList.getTotal(), employeeList);
     }
 
-    public ListResult<Employee> getAllEmployeeByPage(Integer page, Integer pageSize, String keyword) {
+    public ListResult<Employee> getAllEmployeeByPage(Integer page, Integer pageSize, Employee employee, Date[] dateScope) {
         Page<EmployeeDB> employeeDbList = PageHelper.startPage(page, pageSize).doSelectPage(() -> {
             Example example = new Example(EmployeeDB.class);
             Example.Criteria criteria = example.createCriteria();
-            if (keyword != null && !keyword.equals("")) {
-                criteria.andLike("name", "%" + keyword + "%");
+            if (Objects.nonNull(employee)) {
+                criteria.andEqualTo("politicId", employee.getPoliticId())
+                        .andEqualTo("nationId", employee.getNationId())
+                        .andEqualTo("jobLevelId", employee.getJobLevelId())
+                        .andEqualTo("posId", employee.getPosId())
+                        .andEqualTo("engageForm", employee.getEngageForm())
+                        .andEqualTo("departmentId", employee.getDepartmentId());
+            }
+            if (Objects.nonNull(dateScope)) {
+                criteria.andGreaterThanOrEqualTo("beginDate", dateScope[0])
+                        .andLessThanOrEqualTo("beginDate", dateScope[1]);
+            }
+            if (employee.getName() != null && !employee.getName().equals("")) {
+                criteria.andLike("name", "%" + employee.getName() + "%");
             }
             employeeDBMapper.selectByExample(example);
         });
