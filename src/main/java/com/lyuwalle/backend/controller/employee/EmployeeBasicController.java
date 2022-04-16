@@ -6,8 +6,11 @@ import com.lyuwalle.backend.domain.*;
 import com.lyuwalle.backend.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -33,22 +36,6 @@ public class EmployeeBasicController {
     private PoliticStatusService politicStatusService;
     @Autowired
     private DepartmentService departmentService;
-
-    /**
-     *
-     *
-     * @param page
-     * @param pageSize
-     * @param employee
-     * @param dateScope 表示入职日期的范围
-     * @return
-     */
-    @GetMapping("/")
-    public ListResult<Employee> getEmployeeByPage(@RequestParam(defaultValue = "1") Integer page,
-                                        @RequestParam(defaultValue = "10") Integer pageSize,
-                                        Employee employee, Date[] dateScope) {
-        return employeeService.getEmployeeByPage(page, pageSize, employee, dateScope);
-    }
 
     /**
      * 查询所有员工资料
@@ -130,6 +117,17 @@ public class EmployeeBasicController {
     @GetMapping("/deps")
     public List<Department> getAllDepartments() {
         return departmentService.getAllDepartments();
+    }
+
+    /**
+     * 导出所有员工的数据
+     * @return
+     * @throws IOException
+     */
+    @GetMapping("/export")
+    public ResponseEntity<byte[]> exportData() throws IOException {
+        /*首先去数据库里面查询出所有的员工数据，然后返回*/
+        return employeeService.allEmployeeResponseEntity();
     }
 
 }

@@ -25,33 +25,9 @@ public class EmployeeRepo {
     @Autowired
     private EmployeeDBMapper employeeDBMapper;
 
-    /**
-     * 分页查询员工信息
-     *
-     * @param page
-     * @param pageSize
-     * @param employee
-     * @param dateScope
-     * @return
-     * @TODO andEqualTo的条件有待完善
-     */
-    public ListResult<Employee> getEmployeeByPage(Integer page, Integer pageSize, Employee employee, Date[] dateScope) {
-        Page<EmployeeDB> employeeDbList = PageHelper.startPage(page, pageSize).doSelectPage(() -> {
-            Example example = new Example(EmployeeDB.class);
-            Example.Criteria criteria = example.createCriteria();
-            criteria.andLike("name", employee.getName())
-                    .andLike("school", employee.getSchool())
-                    .andEqualTo("jobLevelId", employee.getJobLevelId())
-                    .andEqualTo("workAge", employee.getWorkAge())
-                    .andEqualTo("workId", employee.getWorkId())
-                    .andEqualTo("gender", employee.getGender())
-                    .andGreaterThanOrEqualTo("beginDate", dateScope[0])
-                    .andLessThanOrEqualTo("beginDate", dateScope[1]);
-            example.and(criteria);
-            employeeDBMapper.selectByExample(example);
-        });
-        List<Employee> employeeList = employeeDbList.stream().map(employeeDB -> BeanCopyUtil.copy(employeeDB, Employee.class)).collect(Collectors.toList());
-        return new ListResult<>(employeeDbList.getTotal(), employeeList);
+    public List<Employee> getAllEmployee() {
+        return employeeDBMapper.selectAll().stream().map(employeeDB ->
+                BeanCopyUtil.copy(employeeDB, Employee.class)).collect(Collectors.toList());
     }
 
     public ListResult<Employee> getAllEmployeeByPage(Integer page, Integer pageSize, Employee employee, Date[] dateScope) {
@@ -98,4 +74,5 @@ public class EmployeeRepo {
     public int getMaxEmpId() {
         return employeeDBMapper.getMaxEmpId();
     }
+
 }
