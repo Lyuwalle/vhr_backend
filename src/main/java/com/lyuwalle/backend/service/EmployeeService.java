@@ -127,7 +127,7 @@ public class EmployeeService {
                     hashMap(
                             "name", employee.getName(),
                             "gender", employee.getGender(),
-                            "birthday", simpleDateFormat.format(employee.getBirthday()),
+                            "birthday", employee.getBirthday() == null ? "" : simpleDateFormat.format(employee.getBirthday()),
                             "idCard", employee.getIdCard(),
                             "wedlock", employee.getWedlock(),
                             "nation", employee.getNation().getName(),
@@ -143,12 +143,12 @@ public class EmployeeService {
                             "tiptopDegree", employee.getTiptopDegree(),
                             "school", employee.getSchool(),
                             "specialty", employee.getSpecialty(),
-                            "beginDate", simpleDateFormat.format(employee.getBeginDate()),
+                            "beginDate", employee.getBeginDate() == null ? "" : simpleDateFormat.format(employee.getBeginDate()),
                             "workState", employee.getWorkState(),
                             "contractTerm", employee.getContractTerm(),
-                            "conversionTime", simpleDateFormat.format(employee.getConversionTime()),
-                            "beginContract", simpleDateFormat.format(employee.getBeginContract()),
-                            "endContract", simpleDateFormat.format(employee.getEndContract())
+                            "conversionTime", employee.getConversionTime() == null ? "" : simpleDateFormat.format(employee.getConversionTime()),
+                            "beginContract", employee.getBeginContract() == null ? "" : simpleDateFormat.format(employee.getBeginContract()),
+                            "endContract", employee.getEndContract() == null ? "" : simpleDateFormat.format(employee.getEndContract())
                     );
             result.add(map);
         });
