@@ -7,6 +7,7 @@ import com.lyuwalle.backend.domain.Employee;
 import com.lyuwalle.backend.mapper.EmployeeDBMapper;
 import com.lyuwalle.backend.model.EmployeeDB;
 import com.lyuwalle.backend.utils.BeanCopyUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 /**
  * @author lyuxiyang
  */
+@Slf4j
 @Service
 public class EmployeeRepo {
 
@@ -82,6 +84,7 @@ public class EmployeeRepo {
         AtomicInteger affectedRows = new AtomicInteger();
         employeeDBList.forEach(employeeDB -> {
             employeeDB.setWorkId(String.format("%08d", getMaxEmpId() + 1));
+            log.info("员工数据添加：{}", employeeDB);
             affectedRows.addAndGet(employeeDBMapper.insertSelective(employeeDB));
         });
         return affectedRows.get();
