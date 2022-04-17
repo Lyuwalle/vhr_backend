@@ -8,9 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -128,6 +128,23 @@ public class EmployeeBasicController {
     public ResponseEntity<byte[]> exportData() throws IOException {
         /*首先去数据库里面查询出所有的员工数据，然后返回*/
         return employeeService.allEmployeeResponseEntity();
+    }
+
+    /**
+     * 导入数据
+     * @param file 表示前端上传的文件
+     * @return
+     * @throws IOException
+     */
+    @PostMapping("/import")
+    public RespBean importData(MultipartFile file) throws IOException {
+/*        file.transferTo(new File("/Users/lyuxiyang/Downloads/vhr上传文件"));
+        return RespBean.ok("上传成功");*/
+        List<Employee> employeeList = employeeService.employeeFileToContent(file);
+        if(employeeService.addEmployeeList(employeeList) == employeeList.size()) {
+            return RespBean.ok("上传成功");
+        }
+        return RespBean.error("excel解析失败");
     }
 
 }

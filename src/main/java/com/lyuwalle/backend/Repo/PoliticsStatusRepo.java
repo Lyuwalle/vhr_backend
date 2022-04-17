@@ -2,6 +2,7 @@ package com.lyuwalle.backend.Repo;
 
 import com.lyuwalle.backend.domain.PoliticsStatus;
 import com.lyuwalle.backend.mapper.PoliticsStatusDBMapper;
+import com.lyuwalle.backend.model.AdjustSalaryDB;
 import com.lyuwalle.backend.model.PoliticsStatusDB;
 import com.lyuwalle.backend.utils.BeanCopyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,11 @@ public class PoliticsStatusRepo {
         PoliticsStatusDB politicsStatusDB = new PoliticsStatusDB();
         politicsStatusDB.setId(politicId);
         return BeanCopyUtil.copy(politicsStatusDBMapper.selectByPrimaryKey(politicsStatusDB), PoliticsStatus.class);
+    }
+
+    public PoliticsStatus getPoliticStatusByName(String name) {
+        PoliticsStatusDB politicsStatusDB = new PoliticsStatusDB();
+        politicsStatusDB.setName(name);
+        return BeanCopyUtil.copy(politicsStatusDBMapper.selectOne(politicsStatusDB), PoliticsStatus.class);
     }
 }

@@ -4,6 +4,7 @@ import com.lyuwalle.backend.domain.Employee;
 import com.lyuwalle.backend.domain.JobLevel;
 import com.lyuwalle.backend.mapper.EmployeeDBMapper;
 import com.lyuwalle.backend.mapper.JobLevelDBMapper;
+import com.lyuwalle.backend.model.AdjustSalaryDB;
 import com.lyuwalle.backend.model.EmployeeDB;
 import com.lyuwalle.backend.model.JobLevelDB;
 import com.lyuwalle.backend.utils.BeanCopyUtil;
@@ -69,5 +70,11 @@ public class JobLevelRepo {
         JobLevelDB jobLevelDB = new JobLevelDB();
         jobLevelDB.setId(jobLevelId);
         return BeanCopyUtil.copy(jobLevelDbMapper.selectByPrimaryKey(jobLevelDB), JobLevel.class);
+    }
+
+    public JobLevel getJobLevelByName(String name) {
+        JobLevelDB jobLevelDB = new JobLevelDB();
+        jobLevelDB.setName(name);
+        return BeanCopyUtil.copy(jobLevelDbMapper.selectOne(jobLevelDB), JobLevel.class);
     }
 }

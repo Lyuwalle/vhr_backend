@@ -14,6 +14,7 @@ import tk.mybatis.mapper.entity.Example;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
@@ -75,4 +76,14 @@ public class EmployeeRepo {
         return employeeDBMapper.getMaxEmpId();
     }
 
+
+    public int addEmployeeList(List<Employee> employeeList) {
+        List<EmployeeDB> employeeDBList = employeeList.stream().map(employee -> BeanCopyUtil.copy(employee, EmployeeDB.class)).collect(Collectors.toList());
+        AtomicInteger affectedRows = new AtomicInteger();
+        employeeDBList.forEach(employeeDB -> {
+            employeeDB.setWorkId(String.format("%08d", getMaxEmpId() + 1));
+            affectedRows.addAndGet(employeeDBMapper.insertSelective(employeeDB));
+        });
+        return affectedRows.get();
+    }
 }

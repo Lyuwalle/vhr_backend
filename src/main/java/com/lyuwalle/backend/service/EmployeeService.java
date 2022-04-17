@@ -5,15 +5,21 @@ import com.lyuwalle.backend.common.ListResult;
 import com.lyuwalle.backend.domain.Employee;
 import com.lyuwalle.backend.domain.PoliticsStatus;
 import com.lyuwalle.backend.utils.XlsUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,6 +30,7 @@ import static com.lyuwalle.backend.utils.XlsUtil.hashMap;
 /**
  * @author lyuxiyang
  */
+@Slf4j
 @Service
 public class EmployeeService {
 
@@ -153,5 +160,89 @@ public class EmployeeService {
             result.add(map);
         });
         return XlsUtil.createXlsByte(headers, keys, result);
+    }
+
+    public List<Employee> employeeFileToContent(MultipartFile file) throws IOException {
+        List<Employee> employeeParseList = new ArrayList<>();
+        byte[] bytes = file.getBytes();
+        InputStream inputStream = new ByteArrayInputStream(bytes);
+        XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+        inputStream.close();
+        XSSFSheet sheet = workbook.getSheetAt(0);
+        int rows = sheet.getPhysicalNumberOfRows();
+
+        List<LinkedList<String>> fileContent = new ArrayList<>();
+        //第零行为标题行
+        for(int i = 1; i < rows; i++) {
+            XSSFRow row = sheet.getRow(i);
+            LinkedList<String> rowData = new LinkedList<>();
+            //一共有24列
+            for(int column = 0; column < 24; column++) {
+                XSSFCell cell = row.getCell(column);
+                if(Objects.isNull(cell)) {
+                    rowData.add("");
+                    continue;
+                }
+                cell.setCellType(CellType.STRING);
+                rowData.add(String.valueOf(cell));
+            }
+            fileContent.add(rowData);
+        }
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            fileContent.forEach(employeeRowData -> {
+                Employee employee = new Employee();
+                int index = 0;
+                employee.setName(employeeRowData.get(index++));
+                employee.setGender(employeeRowData.get(index++));
+                try {
+                    employee.setBirthday(dateFormatter.parse(employeeRowData.get(index++)));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                employee.setIdCard(employeeRowData.get(index++));
+                employee.setWedlock(employeeRowData.get(index++));
+                employee.setNationId(nationRepo.getNationByName(employeeRowData.get(index++)).getId());
+                employee.setNativePlace(employeeRowData.get(index++));
+                employee.setPoliticId(politicsStatusRepo.getPoliticStatusByName(employeeRowData.get(index++)).getId());
+                employee.setEmail(employeeRowData.get(index++));
+                employee.setPhone(employeeRowData.get(index++));
+                employee.setAddress(employeeRowData.get(index++));
+                employee.setDepartmentId(departmentRepo.getDepartmentByName(employeeRowData.get(index++)).getId());
+                employee.setJobLevelId(jobLevelRepo.getJobLevelByName(employeeRowData.get(index++)).getId());
+                employee.setPosId(positionRepo.getPositionByName(employeeRowData.get(index++)).getId());
+                employee.setEngageForm(employeeRowData.get(index++));
+                employee.setTiptopDegree(employeeRowData.get(index++));
+                employee.setSchool(employeeRowData.get(index++));
+                employee.setSpecialty(employeeRowData.get(index++));
+                try {
+                    employee.setBeginDate(dateFormatter.parse(employeeRowData.get(index++)));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                employee.setWorkState(employeeRowData.get(index++));
+                employee.setContractTerm(Double.valueOf(employeeRowData.get(index++)));
+                try {
+                    employee.setConversionTime(dateFormatter.parse(employeeRowData.get(index++)));
+                    employee.setBeginContract(dateFormatter.parse(employeeRowData.get(index++)));
+                    employee.setEndContract(dateFormatter.parse(employeeRowData.get(index)));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                employeeParseList.add(employee);
+            });
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+        return employeeParseList;
+    }
+
+    /**
+     * 批量添加employee，employee里面的nation等经过employeeFileToContent的处理已经setNationId了
+     * @param employeeList
+     * @return
+     */
+    public int addEmployeeList(List<Employee> employeeList) {
+        return employeeRepo.addEmployeeList(employeeList);
     }
 }

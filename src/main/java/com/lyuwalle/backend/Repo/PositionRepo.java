@@ -7,6 +7,7 @@ import com.lyuwalle.backend.model.EmployeeDB;
 import com.lyuwalle.backend.model.PositionDB;
 import com.lyuwalle.backend.utils.BeanCopyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -70,5 +71,11 @@ public class PositionRepo {
         PositionDB positionDB = new PositionDB();
         positionDB.setId(posId);
         return BeanCopyUtil.copy(positionDBMapper.selectByPrimaryKey(positionDB), Position.class);
+    }
+
+    public Position getPositionByName(String name) {
+        PositionDB positionDB = new PositionDB();
+        positionDB.setName(name);
+        return BeanCopyUtil.copy(positionDBMapper.selectOne(positionDB), Position.class);
     }
 }

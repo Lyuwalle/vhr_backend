@@ -2,9 +2,11 @@ package com.lyuwalle.backend.Repo;
 
 import com.lyuwalle.backend.domain.Department;
 import com.lyuwalle.backend.mapper.DepartmentDBMapper;
+import com.lyuwalle.backend.model.AdjustSalaryDB;
 import com.lyuwalle.backend.model.DepartmentDB;
 import com.lyuwalle.backend.utils.BeanCopyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -69,5 +71,11 @@ public class DepartmentRepo {
         DepartmentDB departmentDB = new DepartmentDB();
         departmentDB.setId(departmentId);
         return BeanCopyUtil.copy(departmentDBMapper.selectByPrimaryKey(departmentDB), Department.class);
+    }
+
+    public Department getDepartmentByName(String name) {
+        DepartmentDB departmentDB = new DepartmentDB();
+        departmentDB.setName(name);
+        return BeanCopyUtil.copy(departmentDBMapper.selectOne(departmentDB), Department.class);
     }
 }
