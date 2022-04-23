@@ -10,7 +10,7 @@ import java.util.Random;
 
 /**
  * @author lyuxiyang
- *
+ * todo 这个类没有用到，用了Hutool的CaptchaUtil类
  * 生成验证码的工具类
  * width: 验证码图片的宽度
  * height: 验证码图片的高度
